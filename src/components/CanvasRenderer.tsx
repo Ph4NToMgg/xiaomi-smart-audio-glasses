@@ -13,6 +13,7 @@ export const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const lastDrawnFrameRef = useRef<number>(-1);
+  const lastDrawnProgressRef = useRef<number>(-1);
   const rAFRef = useRef<number | null>(null);
 
   const renderFrame = () => {
@@ -46,22 +47,39 @@ export const CanvasRenderer: React.FC<CanvasRendererProps> = ({
     // Clear background
     ctx.clearRect(0, 0, containerWidth, containerHeight);
 
-    // CRISP CONTAIN FIT: Image fits inside container without over-zooming pixels
     const imgW = img.naturalWidth;
     const imgH = img.naturalHeight;
     const imgAspect = imgW / imgH;
     const containerAspect = containerWidth / containerHeight;
 
-    let drawW = containerWidth;
-    let drawH = containerHeight;
-
+    // Calculate CONTAIN dimensions
+    let containW = containerWidth;
+    let containH = containerHeight;
     if (containerAspect > imgAspect) {
-      drawH = containerHeight;
-      drawW = containerHeight * imgAspect;
+      containH = containerHeight;
+      containW = containerHeight * imgAspect;
     } else {
-      drawW = containerWidth;
-      drawH = containerWidth / imgAspect;
+      containW = containerWidth;
+      containH = containerWidth / imgAspect;
     }
+
+    // Calculate COVER dimensions (for 100% full-screen initial view)
+    let coverW = containerWidth;
+    let coverH = containerHeight;
+    if (containerAspect > imgAspect) {
+      coverW = containerWidth;
+      coverH = containerWidth / imgAspect;
+    } else {
+      coverH = containerHeight;
+      coverW = containerHeight * imgAspect;
+    }
+
+    // Smooth Interpolation from COVER (at scroll 0) to CONTAIN (at scroll 0.22)
+    const morphProgress = Math.min(1, Math.max(0, scrollProgress / 0.22));
+    const easeT = 1 - Math.pow(1 - morphProgress, 3); // Cubic ease-out
+
+    const drawW = coverW + (containW - coverW) * easeT;
+    const drawH = coverH + (containH - coverH) * easeT;
 
     const drawX = (containerWidth - drawW) / 2;
     const drawY = (containerHeight - drawH) / 2;
@@ -73,13 +91,12 @@ export const CanvasRenderer: React.FC<CanvasRendererProps> = ({
     ctx.restore();
 
     lastDrawnFrameRef.current = validIndex;
+    lastDrawnProgressRef.current = scrollProgress;
   };
 
   useEffect(() => {
     const loop = () => {
-      if (lastDrawnFrameRef.current !== currentFrameIndex) {
-        renderFrame();
-      }
+      renderFrame();
       rAFRef.current = requestAnimationFrame(loop);
     };
 
@@ -101,10 +118,10 @@ export const CanvasRenderer: React.FC<CanvasRendererProps> = ({
   }, []);
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center pointer-events-none">
+    <div className="relative w-full h-full flex items-center justify-center pointer-events-none overflow-hidden">
       <canvas
         ref={canvasRef}
-        className="block pointer-events-none select-none max-w-full max-h-full object-contain rounded-2xl drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+        className="block pointer-events-none select-none max-w-full max-h-full rounded-2xl"
       />
     </div>
   );

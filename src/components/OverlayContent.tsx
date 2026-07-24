@@ -6,12 +6,15 @@ interface OverlayContentProps {
 }
 
 export const OverlayContent: React.FC<OverlayContentProps> = ({ progress }) => {
-  // Hero Title Fades out as user scrolls
-  const heroOpacity = Math.max(0, 1 - progress / 0.12);
+  // Hero Title Fades out as user scrolls past initial view (0.0 to 0.15)
+  const heroOpacity = Math.max(0, 1 - progress / 0.15);
 
-  // Side Feature Cards smoothly fade in & slide up after initial scroll (0.05 to 0.18)
-  const sideCardOpacity = Math.min(1, Math.max(0, (progress - 0.05) / 0.13));
-  const sideCardTranslateY = (1 - sideCardOpacity) * 28;
+  // Side Feature Cards smoothly fade in & slide up after initial scroll (0.08 to 0.22)
+  const cardT = Math.min(1, Math.max(0, (progress - 0.08) / 0.14));
+  const cardEase = 1 - Math.pow(1 - cardT, 3); // Cubic ease-out curve
+
+  const sideCardOpacity = cardEase;
+  const sideCardTranslateY = (1 - cardEase) * 35;
 
   return (
     <div className="absolute inset-0 z-20 pointer-events-none flex flex-col justify-between p-4 sm:p-8">
@@ -21,7 +24,7 @@ export const OverlayContent: React.FC<OverlayContentProps> = ({ progress }) => {
           style={{
             opacity: heroOpacity,
             transform: `translateY(${(1 - heroOpacity) * -20}px)`,
-            transition: 'opacity 0.1s linear, transform 0.1s linear',
+            transition: 'opacity 0.05s linear, transform 0.05s linear',
           }}
           className="max-w-2xl w-full pointer-events-none"
         >
@@ -42,7 +45,7 @@ export const OverlayContent: React.FC<OverlayContentProps> = ({ progress }) => {
           style={{
             opacity: sideCardOpacity,
             transform: `translateY(${sideCardTranslateY}px)`,
-            transition: 'opacity 0.1s linear, transform 0.1s linear',
+            transition: 'opacity 0.05s linear, transform 0.05s linear',
           }}
           className="glass-studio-gold rounded-2xl p-5 border border-amber-500/40 max-w-xs w-full hidden sm:block pointer-events-none shadow-2xl backdrop-blur-2xl bg-zinc-950/95 space-y-3"
         >
@@ -78,7 +81,7 @@ export const OverlayContent: React.FC<OverlayContentProps> = ({ progress }) => {
           style={{
             opacity: sideCardOpacity,
             transform: `translateY(${sideCardTranslateY}px)`,
-            transition: 'opacity 0.1s linear, transform 0.1s linear',
+            transition: 'opacity 0.05s linear, transform 0.05s linear',
           }}
           className="glass-studio rounded-2xl p-5 border border-zinc-800/80 max-w-xs w-full space-y-3 pointer-events-none shadow-2xl backdrop-blur-2xl bg-zinc-950/95"
         >
