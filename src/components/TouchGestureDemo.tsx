@@ -45,14 +45,14 @@ export const TouchGestureDemo: React.FC = () => {
     <section id="gestures" className="py-28 bg-transparent border-t border-zinc-900/60">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-xs font-semibold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/90 border border-yellow-500/30 text-yellow-400 text-xs font-semibold uppercase tracking-wider mb-4 backdrop-blur-md">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Capacitive Touch Haptics</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-heading">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-heading leading-tight">
             Control Everything <br />
-            <span className="text-gradient-yellow">With a Single Touch.</span>
+            <span className="text-gradient-gold">With a Single Touch.</span>
           </h2>
         </div>
 
@@ -65,19 +65,19 @@ export const TouchGestureDemo: React.FC = () => {
                 <button
                   key={g.id}
                   onClick={() => setActiveGesture(g.id as any)}
-                  className={`w-full text-left p-5 rounded-2xl border transition-all ${
+                  className={`w-full text-left p-5 rounded-2xl border transition-all backdrop-blur-xl ${
                     isSelected
-                      ? 'bg-yellow-500/15 border-yellow-500 text-white yellow-border-glow'
-                      : 'bg-zinc-900/50 border-zinc-800 text-zinc-400 hover:border-zinc-700'
+                      ? 'bg-zinc-900/95 border-yellow-500/90 text-white gold-border-glow shadow-xl'
+                      : 'bg-zinc-950/90 border-zinc-800/80 text-zinc-300 hover:border-zinc-700 hover:bg-zinc-900/80'
                   }`}
                 >
                   <div className="flex items-center gap-4">
-                    <div className="p-2.5 rounded-xl bg-zinc-900 border border-zinc-800 shrink-0">
+                    <div className="p-2.5 rounded-xl bg-zinc-950 border border-zinc-800 shrink-0">
                       {g.icon}
                     </div>
                     <div>
                       <div className="font-bold text-sm text-white font-heading">{g.name}</div>
-                      <div className="text-xs text-yellow-400/90 font-mono mt-0.5">{g.action}</div>
+                      <div className="text-xs text-yellow-400/90 font-mono mt-0.5 font-bold">{g.action}</div>
                     </div>
                   </div>
                 </button>
@@ -86,23 +86,20 @@ export const TouchGestureDemo: React.FC = () => {
           </div>
 
           {/* Right Simulated Glasses Temple Arm Interactive Box */}
-          <div className="lg:col-span-7 glass-panel rounded-3xl p-8 border border-zinc-800 flex flex-col items-center justify-center min-h-[380px] relative overflow-hidden">
-            {/* Background Glow */}
-            <div className="absolute inset-0 bg-yellow-500/5 rounded-3xl pointer-events-none" />
-
-            <div className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-8">
+          <div className="lg:col-span-7 glass-studio rounded-3xl p-8 border border-zinc-800 flex flex-col items-center justify-center min-h-[380px] relative overflow-hidden">
+            <div className="text-xs font-mono text-amber-400 uppercase tracking-widest mb-8 font-bold">
               TEMPLE ARM HAPTIC SIMULATION
             </div>
 
             {/* Temple Arm Graphic representation */}
-            <div className="relative w-full max-w-md h-32 bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900 rounded-full border border-zinc-700 flex items-center justify-between px-8 shadow-2xl">
+            <div className="relative w-full max-w-md h-32 bg-zinc-950/90 rounded-full border border-zinc-700 flex items-center justify-between px-8 shadow-2xl backdrop-blur-xl">
               {/* Haptic Touch Strip Zone */}
-              <div className="relative w-48 h-10 bg-yellow-500/20 border-2 border-yellow-400 rounded-full flex items-center justify-center cursor-pointer yellow-glow transition-all">
-                <span className="text-[10px] font-mono font-bold text-yellow-400 uppercase tracking-wider">
+              <div className="relative w-48 h-10 bg-amber-500/20 border-2 border-amber-400 rounded-full flex items-center justify-center cursor-pointer gold-glow transition-all">
+                <span className="text-[10px] font-mono font-bold text-amber-400 uppercase tracking-wider">
                   30mm Touch Strip
                 </span>
                 {/* Touch ripples animation */}
-                <div className="absolute inset-0 rounded-full border border-yellow-400 animate-ping opacity-75" />
+                <div className="absolute inset-0 rounded-full border border-amber-400 animate-ping opacity-75" />
               </div>
 
               {/* Speaker Grill Indicator */}
@@ -114,12 +111,12 @@ export const TouchGestureDemo: React.FC = () => {
             </div>
 
             {/* Gesture Feedback Status Box */}
-            <div className="mt-10 max-w-md w-full p-4 rounded-2xl bg-zinc-900/90 border border-yellow-500/30 text-center">
+            <div className="mt-10 max-w-md w-full p-4 rounded-2xl bg-zinc-950/95 backdrop-blur-xl border border-yellow-500/40 text-center shadow-xl">
               <div className="text-xs font-mono text-zinc-400 mb-1">Simulated Feedback Output</div>
               <div className="text-sm font-bold text-yellow-400 font-mono">{current.feedback}</div>
             </div>
 
-            <p className="text-xs text-zinc-400 text-center max-w-sm mt-4">{current.description}</p>
+            <p className="text-xs text-zinc-300 text-center max-w-sm mt-4">{current.description}</p>
           </div>
         </div>
       </div>

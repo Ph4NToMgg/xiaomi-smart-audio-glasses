@@ -100,15 +100,15 @@ export const FrameStyleCustomizer: React.FC = () => {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-xs font-semibold uppercase tracking-wider mb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/90 border border-yellow-500/30 text-yellow-400 text-xs font-semibold uppercase tracking-wider mb-4 backdrop-blur-md">
               <RefreshCw className="w-3.5 h-3.5 animate-spin-slow" />
               <span>Modular Frame Detachment</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-heading">
-              5 Styles. <span className="text-gradient-yellow">One Acoustic Core.</span>
+              5 Styles. <span className="text-gradient-gold">One Acoustic Core.</span>
             </h2>
           </div>
-          <p className="text-zinc-400 text-sm max-w-md">
+          <p className="text-zinc-300 text-sm max-w-md">
             Detach the acoustic smart temples with a single click and swap between Browline, Pilot, Round, or Titanium frames instantly.
           </p>
         </div>
@@ -117,7 +117,7 @@ export const FrameStyleCustomizer: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Left Selection List (Frame Styles 01 - 04) */}
           <div className="lg:col-span-5 space-y-3">
-            <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest block mb-2">
+            <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest block mb-2 font-bold">
               SELECT FRAME ARCHITECTURE
             </span>
 
@@ -127,16 +127,16 @@ export const FrameStyleCustomizer: React.FC = () => {
                 <button
                   key={style.id}
                   onClick={() => setActiveStyle(style)}
-                  className={`w-full text-left p-5 rounded-2xl border transition-all flex items-center justify-between group cursor-pointer ${
+                  className={`w-full text-left p-5 rounded-2xl border transition-all flex items-center justify-between group cursor-pointer backdrop-blur-xl ${
                     isSelected
-                      ? 'bg-zinc-900/90 border-yellow-500/90 shadow-[0_0_25px_rgba(255,199,0,0.2)]'
-                      : 'bg-zinc-950/60 border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900/50'
+                      ? 'bg-zinc-900/95 border-yellow-500/90 shadow-[0_0_25px_rgba(255,199,0,0.25)]'
+                      : 'bg-zinc-950/90 border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900/80'
                   }`}
                 >
                   <div className="flex items-center gap-4">
                     <div
                       className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xs font-mono transition-colors ${
-                        isSelected ? 'bg-yellow-400 text-black font-extrabold' : 'bg-zinc-800 text-zinc-400'
+                        isSelected ? 'bg-yellow-400 text-black font-extrabold' : 'bg-zinc-800 text-zinc-300'
                       }`}
                     >
                       0{idx + 1}
@@ -145,12 +145,12 @@ export const FrameStyleCustomizer: React.FC = () => {
                       <div className="font-bold text-sm text-white font-heading group-hover:text-yellow-400 transition-colors">
                         {style.name}
                       </div>
-                      <div className="text-xs text-zinc-400">{style.subtitle}</div>
+                      <div className="text-xs text-zinc-300">{style.subtitle}</div>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <span className="text-[11px] font-mono text-zinc-400 bg-zinc-800/80 px-2.5 py-1 rounded-lg">
+                    <span className="text-[11px] font-mono text-zinc-300 bg-zinc-900/90 border border-zinc-800 px-2.5 py-1 rounded-lg">
                       {style.weight}
                     </span>
                     {isSelected && <Check className="w-4 h-4 text-yellow-400" />}
@@ -161,25 +161,25 @@ export const FrameStyleCustomizer: React.FC = () => {
           </div>
 
           {/* Right Interactive Preview Card */}
-          <div className="lg:col-span-7 glass-panel rounded-3xl p-8 border border-zinc-800 flex flex-col justify-between relative overflow-hidden bg-gradient-to-b from-zinc-900/90 to-[#07070a]">
+          <div className="lg:col-span-7 glass-studio rounded-3xl p-8 border border-zinc-800 flex flex-col justify-between relative overflow-hidden">
             {/* Top Tag & Interactive Lens Selector Buttons */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 z-10">
-              <span className="px-3 py-1 rounded-full bg-yellow-400/20 text-yellow-400 text-xs font-mono font-bold border border-yellow-400/30 w-fit">
+              <span className="px-3.5 py-1.5 rounded-full bg-zinc-900/90 text-yellow-400 text-xs font-mono font-bold border border-yellow-400/40 w-fit backdrop-blur-md">
                 {activeStyle.tag}
               </span>
 
               {/* Interactive Lens Type Switcher Buttons */}
-              <div className="flex items-center gap-1 bg-zinc-900/90 p-1.5 rounded-xl border border-zinc-800 text-xs font-mono">
+              <div className="flex items-center gap-1 bg-zinc-950/95 backdrop-blur-xl p-1.5 rounded-xl border border-zinc-800 text-xs font-mono">
                 {(['blue-light', 'sunglasses', 'prescription'] as const).map((type) => {
                   const isActive = lensType === type;
                   return (
                     <button
                       key={type}
                       onClick={() => setLensType(type)}
-                      className={`px-3.5 py-1.5 rounded-lg transition-all capitalize font-semibold cursor-pointer ${
+                      className={`px-3.5 py-1.5 rounded-lg transition-all capitalize font-bold cursor-pointer ${
                         isActive
-                          ? 'bg-yellow-400 text-black shadow-[0_0_12px_rgba(255,199,0,0.4)]'
-                          : 'text-zinc-400 hover:text-white hover:bg-zinc-800/60'
+                          ? 'bg-yellow-400 text-black shadow-[0_0_15px_rgba(255,199,0,0.5)]'
+                          : 'text-zinc-300 hover:text-white hover:bg-zinc-800/80'
                       }`}
                     >
                       {type === 'blue-light' ? 'Blue Light' : type === 'sunglasses' ? 'Sunglasses' : 'Prescription'}
@@ -190,7 +190,7 @@ export const FrameStyleCustomizer: React.FC = () => {
             </div>
 
             {/* Frame Image Showcase Container with Real-Time Lens Filter */}
-            <div className="relative h-72 sm:h-96 flex items-center justify-center my-2 rounded-2xl overflow-hidden bg-black/80 border border-zinc-800/80 shadow-2xl">
+            <div className="relative h-72 sm:h-96 flex items-center justify-center my-2 rounded-2xl overflow-hidden bg-black/90 border border-zinc-800/80 shadow-2xl">
               {/* Dynamic Accent Lighting */}
               <div
                 className="absolute inset-0 blur-[100px] opacity-25 pointer-events-none transition-all duration-700"
@@ -211,7 +211,7 @@ export const FrameStyleCustomizer: React.FC = () => {
               />
 
               {/* Active Lens Status Badge in top corner of image */}
-              <div className="absolute top-4 left-4 z-30 flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-950/80 border border-zinc-800 backdrop-blur-md text-[11px] font-mono text-zinc-300">
+              <div className="absolute top-4 left-4 z-30 flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-950/90 border border-zinc-800 backdrop-blur-xl text-[11px] font-mono text-zinc-300">
                 {currentLens.icon}
                 <span className="font-bold text-white">{currentLens.lensBadge}</span>
               </div>
@@ -227,7 +227,7 @@ export const FrameStyleCustomizer: React.FC = () => {
               </div>
 
               {/* Lens Explanation Banner */}
-              <div className="p-3 rounded-xl bg-zinc-900/80 border border-zinc-800 text-xs font-mono text-zinc-300 flex items-center gap-3">
+              <div className="p-3.5 rounded-xl bg-zinc-950/90 backdrop-blur-xl border border-zinc-800 text-xs font-mono text-zinc-300 flex items-center gap-3">
                 <Sparkles className="w-4 h-4 text-yellow-400 shrink-0" />
                 <div>
                   <span className="text-yellow-400 font-bold">{currentLens.label}: </span>
@@ -240,7 +240,7 @@ export const FrameStyleCustomizer: React.FC = () => {
                 {activeStyle.features.map((feat) => (
                   <div
                     key={feat}
-                    className="flex items-center gap-2 text-[11px] font-mono text-zinc-300 bg-zinc-900/60 px-3 py-2 rounded-xl border border-zinc-800"
+                    className="flex items-center gap-2 text-[11px] font-mono text-zinc-200 bg-zinc-950/90 backdrop-blur-xl px-3 py-2 rounded-xl border border-zinc-800"
                   >
                     <Check className="w-3.5 h-3.5 text-yellow-400 shrink-0" />
                     <span>{feat}</span>

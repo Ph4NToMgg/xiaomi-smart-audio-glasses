@@ -51,9 +51,9 @@ export const TechSpecs: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-heading mb-4">
-            Technical <span className="text-gradient-yellow">Specifications</span>
+            Technical <span className="text-gradient-gold">Specifications</span>
           </h2>
-          <p className="text-zinc-400 text-sm">
+          <p className="text-zinc-300 text-sm">
             Engineered down to the millimeter for peak acoustic output, ergonomic balance, and all-day comfort.
           </p>
         </div>
@@ -64,10 +64,10 @@ export const TechSpecs: React.FC = () => {
             <button
               key={cat.id}
               onClick={() => setActiveTab(cat.id as any)}
-              className={`flex items-center gap-2 px-5 py-3 rounded-2xl text-xs font-mono font-bold transition-all ${
+              className={`flex items-center gap-2 px-5 py-3 rounded-2xl text-xs font-mono font-bold transition-all backdrop-blur-xl cursor-pointer ${
                 activeTab === cat.id
-                  ? 'bg-yellow-400 text-black shadow-[0_0_20px_rgba(255,199,0,0.3)]'
-                  : 'bg-zinc-900/80 border border-zinc-800 text-zinc-400 hover:text-white'
+                  ? 'bg-yellow-400 text-black shadow-[0_0_20px_rgba(255,199,0,0.4)]'
+                  : 'bg-zinc-950/90 border border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-700'
               }`}
             >
               {cat.icon}
@@ -77,12 +77,12 @@ export const TechSpecs: React.FC = () => {
         </div>
 
         {/* Specs Table Grid */}
-        <div className="glass-panel rounded-3xl p-8 border border-zinc-800 max-w-4xl mx-auto">
+        <div className="glass-studio rounded-3xl p-8 border border-zinc-800 max-w-4xl mx-auto shadow-2xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {specsData[activeTab].map((spec, idx) => (
               <div
                 key={idx}
-                className="p-4 rounded-2xl bg-zinc-900/50 border border-zinc-800/80 flex flex-col justify-between"
+                className="p-4 rounded-2xl bg-zinc-950/90 backdrop-blur-xl border border-zinc-800/80 flex flex-col justify-between"
               >
                 <span className="text-xs font-mono text-zinc-400 mb-1">{spec.label}</span>
                 <span className="text-sm font-bold text-white font-heading">{spec.value}</span>

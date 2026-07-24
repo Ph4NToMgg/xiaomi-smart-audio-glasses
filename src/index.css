@@ -10,7 +10,7 @@
 
   body {
     font-family: var(--font-sans);
-    background-color: #070709;
+    background-color: #060608;
     color: #f1f5f9;
   }
 
@@ -24,7 +24,7 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #070709;
+  background: #060608;
 }
 ::-webkit-scrollbar-thumb {
   background: #27272a;
@@ -34,27 +34,36 @@
   background: #F59E0B;
 }
 
-/* Luxury Glassmorphism Studio Styling */
+/* High-Contrast Luxury Glassmorphism Studio Styling */
 .glass-studio {
-  background: linear-gradient(135deg, rgba(20, 20, 28, 0.8) 0%, rgba(10, 10, 15, 0.9) 100%);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+  background: linear-gradient(135deg, rgba(16, 16, 22, 0.92) 0%, rgba(8, 8, 12, 0.96) 100%);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
 }
 
 .glass-studio-gold {
-  background: linear-gradient(135deg, rgba(32, 26, 16, 0.85) 0%, rgba(15, 12, 8, 0.95) 100%);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(245, 158, 11, 0.35);
-  box-shadow: 0 20px 50px rgba(245, 158, 11, 0.15);
+  background: linear-gradient(135deg, rgba(28, 22, 12, 0.94) 0%, rgba(12, 10, 6, 0.97) 100%);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(245, 158, 11, 0.15);
 }
 
 .glass-badge {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
+  background: rgba(12, 12, 16, 0.90);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.glass-card-dark {
+  background: rgba(10, 10, 14, 0.92);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
 }
 
 /* Text Gradients */
@@ -78,11 +87,11 @@
 
 /* Glow Utilities */
 .gold-glow {
-  box-shadow: 0 0 35px rgba(245, 158, 11, 0.25);
+  box-shadow: 0 0 35px rgba(245, 158, 11, 0.35);
 }
 
 .gold-border-glow {
-  box-shadow: 0 0 18px rgba(245, 158, 11, 0.4), inset 0 0 18px rgba(245, 158, 11, 0.12);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.5), inset 0 0 20px rgba(245, 158, 11, 0.15);
 }
 
 /* Ambient Background Lights */
