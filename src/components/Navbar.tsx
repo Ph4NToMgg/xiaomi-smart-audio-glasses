@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Glasses, ShoppingBag, Sparkles, Menu, X, Volume2, VolumeX } from 'lucide-react';
+import { ShoppingBag, Menu, X } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isAudioMuted, setIsAudioMuted] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,6 +17,7 @@ export const Navbar: React.FC = () => {
     { name: 'Story', href: '#story-animation' },
     { name: 'Acoustics', href: '#acoustics' },
     { name: 'Frame Styles', href: '#frames' },
+    { name: 'Macro Gallery', href: '#gallery' },
     { name: 'Touch Controls', href: '#gestures' },
     { name: 'Specs', href: '#specs' },
   ];
@@ -60,16 +60,8 @@ export const Navbar: React.FC = () => {
           ))}
         </nav>
 
-        {/* Action Buttons */}
+        {/* Action Button */}
         <div className="hidden sm:flex items-center gap-4">
-          <button
-            onClick={() => setIsAudioMuted(!isAudioMuted)}
-            className="p-2 rounded-xl bg-zinc-950/90 border border-zinc-800 text-zinc-300 hover:text-yellow-400 hover:border-yellow-500/40 transition-all backdrop-blur-md"
-            title={isAudioMuted ? 'Unmute preview sound' : 'Mute sound'}
-          >
-            {isAudioMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-yellow-400" />}
-          </button>
-
           <a
             href="#buy"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-yellow-400 hover:bg-yellow-300 text-black font-extrabold text-xs tracking-wide uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(255,199,0,0.4)] font-heading"
