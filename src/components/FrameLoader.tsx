@@ -14,11 +14,10 @@ export const FrameLoader: React.FC<FrameLoaderProps> = ({ totalFrames, onFramesL
   useEffect(() => {
     let isCancelled = false;
     const images: HTMLImageElement[] = new Array(totalFrames);
-    const BATCH_SIZE = 12; // Load in small batches to optimize network
+    const BATCH_SIZE = 12;
     let currentIndex = 0;
 
     const formatFrameNumber = (num: number): string => {
-      // ezgif-frame-001.jpg to ezgif-frame-240.jpg
       return String(num).padStart(3, '0');
     };
 
@@ -35,14 +34,16 @@ export const FrameLoader: React.FC<FrameLoaderProps> = ({ totalFrames, onFramesL
           const frameNum = formatFrameNumber(frameIndex + 1);
           const src = `/images/ezgif-frame-${frameNum}.jpg`;
 
+          img.decoding = 'async';
           img.src = src;
+
           img.onload = () => {
             if (!isCancelled) {
               images[frameIndex] = img;
               setLoadedCount((prev) => {
                 const next = prev + 1;
                 if (next === Math.floor(totalFrames * 0.3)) {
-                  setStatusText('Buffering 240Hz frame sequence...');
+                  setStatusText('Buffering 1080p frame sequence...');
                 } else if (next === Math.floor(totalFrames * 0.7)) {
                   setStatusText('Calibrating high-precision scroll timeline...');
                 }
@@ -52,7 +53,6 @@ export const FrameLoader: React.FC<FrameLoaderProps> = ({ totalFrames, onFramesL
             resolve();
           };
           img.onerror = () => {
-            // Fallback if image load fails
             console.warn(`Failed to load frame ${src}`);
             if (!isCancelled) {
               images[frameIndex] = img;
@@ -69,7 +69,6 @@ export const FrameLoader: React.FC<FrameLoaderProps> = ({ totalFrames, onFramesL
       currentIndex = endIndex;
 
       if (currentIndex < totalFrames && !isCancelled) {
-        // Small delay between batches to allow main thread breathing room
         setTimeout(loadNextBatch, 15);
       } else if (currentIndex >= totalFrames && !isCancelled) {
         setStatusText('Ready for scroll storytelling');
@@ -100,11 +99,9 @@ export const FrameLoader: React.FC<FrameLoaderProps> = ({ totalFrames, onFramesL
         fadeOut ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >
-      {/* Background ambient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-yellow-500/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 flex flex-col items-center max-w-md w-full px-6 text-center">
-        {/* Animated Glasses Icon / Xiaomi Logo */}
         <div className="relative mb-8 flex items-center justify-center">
           <div className="w-20 h-20 rounded-2xl bg-zinc-900/90 border border-yellow-500/30 flex items-center justify-center yellow-glow">
             <svg
@@ -128,7 +125,6 @@ export const FrameLoader: React.FC<FrameLoaderProps> = ({ totalFrames, onFramesL
           </span>
         </div>
 
-        {/* Title */}
         <h2 className="text-2xl font-bold tracking-tight text-white mb-1 font-heading">
           Xiaomi Smart Audio Glasses
         </h2>
@@ -136,26 +132,19 @@ export const FrameLoader: React.FC<FrameLoaderProps> = ({ totalFrames, onFramesL
           Scroll-Driven Frame Renderer
         </p>
 
-        {/* Progress Bar Container */}
         <div className="w-full bg-zinc-900/80 border border-zinc-800 rounded-full h-3 p-0.5 overflow-hidden mb-4 relative shadow-inner">
           <div
             className="h-full bg-gradient-to-r from-yellow-500 via-yellow-400 to-amber-300 rounded-full transition-all duration-200 ease-out relative"
             style={{ width: `${percentage}%` }}
           >
-            {/* Shimmer line */}
             <div className="absolute inset-0 bg-white/30 animate-pulse rounded-full" />
           </div>
         </div>
 
-        {/* Stats Row */}
         <div className="flex items-center justify-between w-full text-xs font-mono text-zinc-400">
           <span className="text-zinc-500">{statusText}</span>
           <span className="text-yellow-400 font-bold">{percentage}%</span>
         </div>
-
-        <p className="text-[11px] text-zinc-600 mt-6 font-mono">
-          Preloading frame {loadedCount} / {totalFrames} (1640×1264 WebP)
-        </p>
       </div>
     </div>
   );
