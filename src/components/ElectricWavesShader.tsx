@@ -1,28 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
 export const ElectricWavesShader: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const materialRef = useRef<THREE.ShaderMaterial | null>(null);
-
-  // Exact default parameters requested by user
-  const [waveCount, setWaveCount] = useState(5.0);
-  const [amplitude, setAmplitude] = useState(0.19);
-  const [frequency, setFrequency] = useState(5.1);
-  const [brightness, setBrightness] = useState(0.00509);
-  const [colorSeparation, setColorSeparation] = useState(0.04);
-  const [showControls, setShowControls] = useState(true);
-
-  // Sync React state → shader uniforms
-  useEffect(() => {
-    if (materialRef.current) {
-      materialRef.current.uniforms.u_waveCount.value = waveCount;
-      materialRef.current.uniforms.u_amplitude.value = amplitude;
-      materialRef.current.uniforms.u_frequency.value = frequency;
-      materialRef.current.uniforms.u_brightness.value = brightness;
-      materialRef.current.uniforms.u_colorSeparation.value = colorSeparation;
-    }
-  }, [waveCount, amplitude, frequency, brightness, colorSeparation]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -88,14 +68,15 @@ export const ElectricWavesShader: React.FC = () => {
       }
     `;
 
+    // Hardcoded exact preset values from user screenshot
     const uniforms = {
       u_time: { value: 0 },
       u_resolution: { value: new THREE.Vector2() },
-      u_waveCount: { value: waveCount },
-      u_amplitude: { value: amplitude },
-      u_frequency: { value: frequency },
-      u_brightness: { value: brightness },
-      u_colorSeparation: { value: colorSeparation },
+      u_waveCount: { value: 5.0 },
+      u_amplitude: { value: 0.19 },
+      u_frequency: { value: 5.1 },
+      u_brightness: { value: 0.00509 },
+      u_colorSeparation: { value: 0.04 },
     };
 
     const material = new THREE.ShaderMaterial({
@@ -103,7 +84,6 @@ export const ElectricWavesShader: React.FC = () => {
       vertexShader,
       fragmentShader,
     });
-    materialRef.current = material;
 
     const geometry = new THREE.PlaneGeometry(2, 2);
     const mesh = new THREE.Mesh(geometry, material);
@@ -136,142 +116,11 @@ export const ElectricWavesShader: React.FC = () => {
     };
   }, []);
 
-  const controlPanelStyle: React.CSSProperties = {
-    position: 'fixed',
-    bottom: '24px',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    backgroundColor: 'rgba(0, 0, 0, 0.85)',
-    backdropFilter: 'blur(16px)',
-    WebkitBackdropFilter: 'blur(16px)',
-    border: '1px solid rgba(255, 255, 255, 0.15)',
-    padding: '16px 20px',
-    borderRadius: '16px',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '10px',
-    color: 'white',
-    fontFamily: 'sans-serif',
-    width: '300px',
-    zIndex: 50,
-    boxShadow: '0 20px 50px rgba(0,0,0,0.9)',
-  };
-
-  const labelStyle: React.CSSProperties = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    fontSize: '12px',
-    fontWeight: 'bold',
-    marginBottom: '3px',
-  };
-
-  const sliderStyle: React.CSSProperties = {
-    width: '100%',
-    accentColor: '#FF2A00',
-    cursor: 'pointer',
-  };
-
   return (
-    <>
-      {/* ALWAYS IN BACKGROUND OF ENTIRE SITE */}
-      <div
-        ref={containerRef}
-        className="fixed inset-0 -z-10 pointer-events-none w-full h-full"
-        aria-label="Interactive electric waves background"
-      />
-
-      {/* Control Panel Toggle Button */}
-      <button
-        onClick={() => setShowControls(!showControls)}
-        className="fixed bottom-6 right-6 z-50 px-4 py-2 rounded-full bg-black/80 border border-red-500/50 text-red-400 font-mono text-xs font-bold backdrop-blur-xl shadow-2xl hover:border-red-400 transition-all cursor-pointer"
-      >
-        {showControls ? 'Hide Shader Controls' : 'Show Shader Controls'}
-      </button>
-
-      {/* Exact Floating Control Panel from User Screenshot */}
-      {showControls && (
-        <div style={controlPanelStyle} className="pointer-events-auto">
-          <div>
-            <div style={labelStyle}>
-              <span>Wave Count</span>
-              <span>{waveCount.toFixed(1)}</span>
-            </div>
-            <input
-              type="range"
-              min="1"
-              max="20"
-              step="1"
-              value={waveCount}
-              onChange={(e) => setWaveCount(parseFloat(e.target.value))}
-              style={sliderStyle}
-            />
-          </div>
-
-          <div>
-            <div style={labelStyle}>
-              <span>Amplitude</span>
-              <span>{amplitude.toFixed(2)}</span>
-            </div>
-            <input
-              type="range"
-              min="0.01"
-              max="0.5"
-              step="0.01"
-              value={amplitude}
-              onChange={(e) => setAmplitude(parseFloat(e.target.value))}
-              style={sliderStyle}
-            />
-          </div>
-
-          <div>
-            <div style={labelStyle}>
-              <span>Frequency</span>
-              <span>{frequency.toFixed(1)}</span>
-            </div>
-            <input
-              type="range"
-              min="0.5"
-              max="10"
-              step="0.1"
-              value={frequency}
-              onChange={(e) => setFrequency(parseFloat(e.target.value))}
-              style={sliderStyle}
-            />
-          </div>
-
-          <div>
-            <div style={labelStyle}>
-              <span>Brightness</span>
-              <span>{brightness.toFixed(5)}</span>
-            </div>
-            <input
-              type="range"
-              min="0.00001"
-              max="0.01"
-              step="0.00001"
-              value={brightness}
-              onChange={(e) => setBrightness(parseFloat(e.target.value))}
-              style={sliderStyle}
-            />
-          </div>
-
-          <div>
-            <div style={labelStyle}>
-              <span>Color Separation</span>
-              <span>{colorSeparation.toFixed(2)}</span>
-            </div>
-            <input
-              type="range"
-              min="0.0"
-              max="0.5"
-              step="0.01"
-              value={colorSeparation}
-              onChange={(e) => setColorSeparation(parseFloat(e.target.value))}
-              style={sliderStyle}
-            />
-          </div>
-        </div>
-      )}
-    </>
+    <div
+      ref={containerRef}
+      className="fixed inset-0 -z-10 pointer-events-none w-full h-full"
+      aria-label="Interactive electric waves background"
+    />
   );
 };
