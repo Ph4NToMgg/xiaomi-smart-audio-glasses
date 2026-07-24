@@ -104,7 +104,7 @@ export const CanvasRenderer: React.FC<CanvasRendererProps> = ({
     <div className="relative w-full h-full flex items-center justify-center pointer-events-none">
       <canvas
         ref={canvasRef}
-        className="block max-w-full max-h-full object-contain rounded-2xl drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+        className="block pointer-events-none select-none max-w-full max-h-full object-contain rounded-2xl drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
       />
     </div>
   );

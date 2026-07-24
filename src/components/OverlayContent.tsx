@@ -1,14 +1,11 @@
 import React from 'react';
-import { Sparkles, Radio, Layers, Sliders, BatteryCharging, Wrench, ShieldCheck, Cpu } from 'lucide-react';
+import { Sparkles, Radio, Layers, Wrench } from 'lucide-react';
 
 interface OverlayContentProps {
   progress: number;
 }
 
 export const OverlayContent: React.FC<OverlayContentProps> = ({ progress }) => {
-  const angle = Math.round(progress * 360);
-
-  // Phases tailored to rotation (0-50%) and exploded view / disassembly (50-100%)
   const getCurrentPhase = () => {
     if (progress < 0.25) return { num: '01', name: '360° DESIGN', icon: <Sparkles className="w-3.5 h-3.5 text-amber-400" /> };
     if (progress < 0.50) return { num: '02', name: 'ACOUSTICS', icon: <Radio className="w-3.5 h-3.5 text-amber-400" /> };
@@ -21,15 +18,15 @@ export const OverlayContent: React.FC<OverlayContentProps> = ({ progress }) => {
 
   return (
     <div className="absolute inset-0 z-20 pointer-events-none flex flex-col justify-between p-4 sm:p-8">
-      {/* Top Hero Title (visible at start, dissolves upon scrolling) */}
-      <div className="w-full flex flex-col items-center text-center pt-12 sm:pt-16">
+      {/* Top Hero Title */}
+      <div className="w-full flex flex-col items-center text-center pt-12 sm:pt-16 pointer-events-none">
         <div
           style={{
             opacity: heroOpacity,
             transform: `translateY(${(1 - heroOpacity) * -16}px)`,
             transition: 'opacity 0.2s ease-out, transform 0.2s ease-out',
           }}
-          className="max-w-2xl w-full"
+          className="max-w-2xl w-full pointer-events-none"
         >
           <span className="inline-block px-3.5 py-1.5 rounded-full bg-amber-500/10 text-amber-400 text-[11px] font-mono font-bold tracking-widest uppercase mb-3 border border-amber-500/30">
             Mijia Smart Audio Eyewear
@@ -42,9 +39,9 @@ export const OverlayContent: React.FC<OverlayContentProps> = ({ progress }) => {
       </div>
 
       {/* Center Layout: Sidebar Telemetry Docks */}
-      <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-6 pointer-events-auto">
+      <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-6 pointer-events-none">
         {/* Left Telemetry Box */}
-        <div className="glass-studio rounded-2xl p-4 sm:p-5 border border-zinc-800/80 space-y-4 max-w-xs w-full hidden sm:block">
+        <div className="glass-studio rounded-2xl p-4 sm:p-5 border border-zinc-800/80 space-y-4 max-w-xs w-full hidden sm:block pointer-events-none">
           <div className="flex items-center justify-between border-b border-zinc-800/80 pb-3">
             <div className="flex items-center gap-2 text-xs font-mono font-bold text-amber-400">
               {phase.icon}
@@ -82,7 +79,7 @@ export const OverlayContent: React.FC<OverlayContentProps> = ({ progress }) => {
         </div>
 
         {/* Right Dynamic Storytelling Card */}
-        <div className="glass-studio-gold rounded-2xl p-5 border border-amber-500/30 max-w-sm w-full space-y-3">
+        <div className="glass-studio-gold rounded-2xl p-5 border border-amber-500/30 max-w-sm w-full space-y-3 pointer-events-none">
           {progress < 0.25 && (
             <div>
               <span className="text-[10px] font-mono text-amber-400 font-bold tracking-widest uppercase block mb-1">
@@ -134,7 +131,7 @@ export const OverlayContent: React.FC<OverlayContentProps> = ({ progress }) => {
       </div>
 
       {/* Bottom Footer Telemetry */}
-      <div className="w-full flex items-center justify-between text-[11px] font-mono text-zinc-500 pt-3 border-t border-zinc-900/80">
+      <div className="w-full flex items-center justify-between text-[11px] font-mono text-zinc-500 pt-3 border-t border-zinc-900/80 pointer-events-none">
         <span>
           {progress < 0.5 ? 'SCROLL TO ROTATE 360° FRAME' : 'SCROLL TO EXPLODE COMPONENT VIEW'}
         </span>
