@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FrameStyle } from '../types';
-import { Check, Sparkles, RefreshCw, Eye, Shield } from 'lucide-react';
+import { Check, RefreshCw } from 'lucide-react';
 
 export const FrameStyleCustomizer: React.FC = () => {
   const styles: FrameStyle[] = [
@@ -11,7 +11,7 @@ export const FrameStyleCustomizer: React.FC = () => {
       description: 'Iconic thick-rim silhouette crafted from high-density NCVM coated acetate with matte finish.',
       weight: '38.1g',
       tag: 'Most Popular',
-      image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&auto=format&fit=crop&q=80',
+      image: '/images/ezgif-frame-001.jpg',
       accentColor: '#FFC700',
       features: ['UV400 Anti-Blue Light Lenses', 'Matte Black Finish', 'Scratch Resistant Coating'],
     },
@@ -22,7 +22,7 @@ export const FrameStyleCustomizer: React.FC = () => {
       description: 'Slender circular frames inspired by vintage Italian specs with refined keyhole bridge detailing.',
       weight: '36.8g',
       tag: 'New Release',
-      image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=800&auto=format&fit=crop&q=80',
+      image: '/images/ezgif-frame-060.jpg',
       accentColor: '#e4e4e7',
       features: ['Ultra-Thin Rim Design', 'Flexible Titanium Nose Pads', 'Anti-Glare Multi-Coating'],
     },
@@ -33,7 +33,7 @@ export const FrameStyleCustomizer: React.FC = () => {
       description: 'Double-bridge aviator frame sculpted from Grade 5 Japanese titanium for unparalleled lightness.',
       weight: '34.5g',
       tag: 'Ultra-Light',
-      image: 'https://images.unsplash.com/photo-1508296695146-257a814070b4?w=800&auto=format&fit=crop&q=80',
+      image: '/images/ezgif-frame-120.jpg',
       accentColor: '#FFD700',
       features: ['Aerospace Grade 5 Titanium', 'Gold PVD Electroplating', 'Polarized TAC Lenses'],
     },
@@ -44,7 +44,7 @@ export const FrameStyleCustomizer: React.FC = () => {
       description: 'Crystal-clear TR90 thermoplastic frame revealing internal micro-wiring and gold contact pins.',
       weight: '37.9g',
       tag: 'Limited Edition',
-      image: 'https://images.unsplash.com/photo-1577803645773-f96470509666?w=800&auto=format&fit=crop&q=80',
+      image: '/images/ezgif-frame-180.jpg',
       accentColor: '#38bdf8',
       features: ['Transparent TR90 Polymer', 'Gold Contact Pin Accents', 'Photochromic Sun-Adaptive'],
     },
@@ -54,10 +54,10 @@ export const FrameStyleCustomizer: React.FC = () => {
   const [lensType, setLensType] = useState<'blue-light' | 'sunglasses' | 'prescription'>('blue-light');
 
   return (
-    <section id="frames" className="py-28 bg-[#050507] border-t border-zinc-900 relative">
+    <section id="frames" className="py-24 bg-[#050507] border-t border-zinc-900 relative">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-xs font-semibold uppercase tracking-wider mb-4">
               <RefreshCw className="w-3.5 h-3.5" />
@@ -68,7 +68,7 @@ export const FrameStyleCustomizer: React.FC = () => {
             </h2>
           </div>
           <p className="text-zinc-400 text-sm max-w-md">
-            Detach the acoustic smart temples with a single click and attach any frame style to match your daily outfit, business meeting, or workout routine.
+            Detach the acoustic smart temples with a single click and attach any frame style to match your daily outfit.
           </p>
         </div>
 
@@ -80,7 +80,7 @@ export const FrameStyleCustomizer: React.FC = () => {
               Select Frame Architecture
             </span>
 
-            {styles.map((style) => {
+            {styles.map((style, idx) => {
               const isSelected = activeStyle.id === style.id;
               return (
                 <button
@@ -98,7 +98,7 @@ export const FrameStyleCustomizer: React.FC = () => {
                         isSelected ? 'bg-yellow-400 text-black' : 'bg-zinc-800 text-zinc-400'
                       }`}
                     >
-                      0{styles.indexOf(style) + 1}
+                      0{idx + 1}
                     </div>
                     <div>
                       <div className="font-bold text-sm text-white font-heading group-hover:text-yellow-400 transition-colors">
@@ -119,10 +119,10 @@ export const FrameStyleCustomizer: React.FC = () => {
             })}
           </div>
 
-          {/* Right Preview Card */}
-          <div className="lg:col-span-7 glass-panel rounded-3xl p-8 border border-zinc-800 flex flex-col justify-between relative overflow-hidden">
+          {/* Right Preview Card with Local Frame Image */}
+          <div className="lg:col-span-7 glass-panel rounded-3xl p-8 border border-zinc-800 flex flex-col justify-between relative overflow-hidden bg-gradient-to-b from-zinc-900/90 to-[#07070a]">
             {/* Top Tag & Switcher */}
-            <div className="flex items-center justify-between mb-6 z-10">
+            <div className="flex items-center justify-between mb-4 z-10">
               <span className="px-3 py-1 rounded-full bg-yellow-400/20 text-yellow-400 text-xs font-mono font-bold border border-yellow-400/30">
                 {activeStyle.tag}
               </span>
@@ -145,16 +145,18 @@ export const FrameStyleCustomizer: React.FC = () => {
               </div>
             </div>
 
-            {/* Frame Image & Glow */}
-            <div className="relative h-64 sm:h-80 flex items-center justify-center my-4">
+            {/* Frame Image Container - Using Local Public Frame Images */}
+            <div className="relative h-64 sm:h-80 flex items-center justify-center my-2 rounded-2xl overflow-hidden bg-black/60 border border-zinc-800">
               <div
-                className="absolute inset-0 rounded-full blur-[100px] opacity-20 transition-all duration-500 pointer-events-none"
+                className="absolute inset-0 blur-[90px] opacity-20 pointer-events-none transition-all duration-500"
                 style={{ backgroundColor: activeStyle.accentColor }}
               />
+              
               <img
+                key={activeStyle.id}
                 src={activeStyle.image}
                 alt={activeStyle.name}
-                className="relative z-10 max-h-full max-w-full object-contain rounded-2xl shadow-2xl transition-all duration-500 transform hover:scale-105"
+                className="relative z-10 w-full h-full object-cover rounded-xl transition-all duration-500"
               />
             </div>
 
