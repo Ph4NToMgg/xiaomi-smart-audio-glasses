@@ -1,57 +1,98 @@
 import React, { useState } from 'react';
-import { FrameStyle } from '../types';
-import { Check, RefreshCw } from 'lucide-react';
+import { Check, RefreshCw, Sun, Eye, ShieldCheck, Sparkles } from 'lucide-react';
+
+interface FrameStyleItem {
+  id: string;
+  name: string;
+  subtitle: string;
+  description: string;
+  weight: string;
+  tag: string;
+  image: string;
+  accentColor: string;
+  features: string[];
+}
 
 export const FrameStyleCustomizer: React.FC = () => {
-  const styles: FrameStyle[] = [
+  const styles: FrameStyleItem[] = [
     {
-      id: 'wayfarer',
-      name: 'Wayfarer Classic',
-      subtitle: 'Timeless Everyday Elegance',
-      description: 'Iconic thick-rim silhouette crafted from high-density NCVM coated acetate with matte finish.',
+      id: 'browline',
+      name: 'Browline Classic',
+      subtitle: 'Composed Classic Aesthetics',
+      description: 'Iconic thick-top browline frame crafted from high-density NCVM coated acetate with matte finish.',
       weight: '38.1g',
-      tag: 'Most Popular',
-      image: '/images/ezgif-frame-001.jpg',
+      tag: 'Official Best Seller',
+      image: '/images/style-browline.png',
       accentColor: '#FFC700',
-      features: ['UV400 Anti-Blue Light Lenses', 'Matte Black Finish', 'Scratch Resistant Coating'],
+      features: ['High-Density NCVM Coating', 'Ergonomic 5-Point Balance', 'Scratch Resistant Surface'],
     },
     {
       id: 'round',
-      name: 'Retro Round',
-      subtitle: 'Artisanal Intellectual Aesthetics',
+      name: 'Retro Round Acetate',
+      subtitle: 'Artisanal Intellectual Elegance',
       description: 'Slender circular frames inspired by vintage Italian specs with refined keyhole bridge detailing.',
       weight: '36.8g',
       tag: 'New Release',
-      image: '/images/ezgif-frame-060.jpg',
+      image: '/images/style-round.png',
       accentColor: '#e4e4e7',
       features: ['Ultra-Thin Rim Design', 'Flexible Titanium Nose Pads', 'Anti-Glare Multi-Coating'],
     },
     {
       id: 'aviator',
-      name: 'Titanium Aviator',
-      subtitle: 'Aerospace Grade Titanium Alloy',
-      description: 'Double-bridge aviator frame sculpted from Grade 5 Japanese titanium for unparalleled lightness.',
-      weight: '34.5g',
-      tag: 'Ultra-Light',
-      image: '/images/ezgif-frame-120.jpg',
+      name: 'Pilot Aviator',
+      subtitle: 'Classic Sunglasses Double-Bridge',
+      description: 'Double-bridge aviator pilot frame sculpted from aerospace grade titanium alloy for statement style.',
+      weight: '35.2g',
+      tag: 'Pilot Edition',
+      image: '/images/style-aviator.png',
       accentColor: '#FFD700',
-      features: ['Aerospace Grade 5 Titanium', 'Gold PVD Electroplating', 'Polarized TAC Lenses'],
+      features: ['Aerospace Titanium Alloy', 'Gold PVD Electroplating', 'Double Bridge Reinforced'],
     },
     {
-      id: 'clear',
-      name: 'Clear Tech Edition',
-      subtitle: 'Transparent Cyberpunk Aesthetic',
-      description: 'Crystal-clear TR90 thermoplastic frame revealing internal micro-wiring and gold contact pins.',
-      weight: '37.9g',
-      tag: 'Limited Edition',
-      image: '/images/ezgif-frame-180.jpg',
+      id: 'titanium',
+      name: 'Titanium Floating Rim',
+      subtitle: 'Ultra-Light Rimless Architecture',
+      description: 'Minimalist floating-frame design contouring facial lines. The lightest frame option in the lineup.',
+      weight: '34.5g',
+      tag: 'Ultra-Light (34.5g)',
+      image: '/images/style-titanium.png',
       accentColor: '#38bdf8',
-      features: ['Transparent TR90 Polymer', 'Gold Contact Pin Accents', 'Photochromic Sun-Adaptive'],
+      features: ['Floating Rimless Optics', 'Grade 5 Japanese Titanium', 'Invisible Contact Pins'],
     },
   ];
 
-  const [activeStyle, setActiveStyle] = useState<FrameStyle>(styles[0]);
-  const [lensType, setLensType] = useState<'blue-light' | 'sunglasses' | 'prescription'>('blue-light');
+  const [activeStyle, setActiveStyle] = useState<FrameStyleItem>(styles[0]);
+  const [lensType, setLensType] = useState<'blue-light' | 'sunglasses' | 'prescription'>('sunglasses');
+
+  // Lens configurations
+  const lensConfigs = {
+    'blue-light': {
+      label: 'Blue Light Blocking',
+      badge: 'UV400 Anti-Blue Filter',
+      icon: <ShieldCheck className="w-3.5 h-3.5 text-sky-400" />,
+      description: 'Filters 99% of harmful 415-455nm blue light emitted from OLED screens and laptops.',
+      overlayClass: 'bg-sky-500/10 mix-blend-screen border-sky-400/30',
+      lensBadge: 'CLEAR UV400',
+    },
+    'sunglasses': {
+      label: 'Dark Sunglasses TAC',
+      badge: 'TAC Polarized UV400',
+      icon: <Sun className="w-3.5 h-3.5 text-yellow-400" />,
+      description: 'Category 3 dark polarized lenses eliminating reflections from water, snow, and windshields.',
+      overlayClass: 'bg-black/60 backdrop-brightness-75 border-yellow-500/40',
+      lensBadge: 'DARK POLARIZED',
+    },
+    'prescription': {
+      label: 'Prescription / Transitions',
+      badge: 'Photochromic Adaptive',
+      icon: <Eye className="w-3.5 h-3.5 text-purple-400" />,
+      description: 'Custom diopter optical compatibility with photochromic automatic darkening in sunlight.',
+      overlayClass: 'bg-purple-900/15 backdrop-hue-rotate-30 border-purple-400/30',
+      lensBadge: 'TRANSITION ADAPTIVE',
+    },
+  };
+
+  const currentLens = lensConfigs[lensType];
 
   return (
     <section id="frames" className="py-24 bg-[#050507] border-t border-zinc-900 relative">
@@ -60,7 +101,7 @@ export const FrameStyleCustomizer: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-xs font-semibold uppercase tracking-wider mb-4">
-              <RefreshCw className="w-3.5 h-3.5" />
+              <RefreshCw className="w-3.5 h-3.5 animate-spin-slow" />
               <span>Modular Frame Detachment</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-heading">
@@ -68,16 +109,16 @@ export const FrameStyleCustomizer: React.FC = () => {
             </h2>
           </div>
           <p className="text-zinc-400 text-sm max-w-md">
-            Detach the acoustic smart temples with a single click and attach any frame style to match your daily outfit.
+            Detach the acoustic smart temples with a single click and swap between Browline, Pilot, Round, or Titanium frames instantly.
           </p>
         </div>
 
         {/* Interactive Customizer Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Left Selection List */}
+          {/* Left Selection List (Frame Styles 01 - 04) */}
           <div className="lg:col-span-5 space-y-3">
             <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest block mb-2">
-              Select Frame Architecture
+              SELECT FRAME ARCHITECTURE
             </span>
 
             {styles.map((style, idx) => {
@@ -86,16 +127,16 @@ export const FrameStyleCustomizer: React.FC = () => {
                 <button
                   key={style.id}
                   onClick={() => setActiveStyle(style)}
-                  className={`w-full text-left p-5 rounded-2xl border transition-all flex items-center justify-between group ${
+                  className={`w-full text-left p-5 rounded-2xl border transition-all flex items-center justify-between group cursor-pointer ${
                     isSelected
-                      ? 'bg-zinc-900/90 border-yellow-500/80 shadow-[0_0_20px_rgba(255,199,0,0.15)]'
+                      ? 'bg-zinc-900/90 border-yellow-500/90 shadow-[0_0_25px_rgba(255,199,0,0.2)]'
                       : 'bg-zinc-950/60 border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900/50'
                   }`}
                 >
                   <div className="flex items-center gap-4">
                     <div
-                      className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xs font-mono ${
-                        isSelected ? 'bg-yellow-400 text-black' : 'bg-zinc-800 text-zinc-400'
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xs font-mono transition-colors ${
+                        isSelected ? 'bg-yellow-400 text-black font-extrabold' : 'bg-zinc-800 text-zinc-400'
                       }`}
                     >
                       0{idx + 1}
@@ -109,7 +150,7 @@ export const FrameStyleCustomizer: React.FC = () => {
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <span className="text-[11px] font-mono text-zinc-400 bg-zinc-800/80 px-2 py-0.5 rounded">
+                    <span className="text-[11px] font-mono text-zinc-400 bg-zinc-800/80 px-2.5 py-1 rounded-lg">
                       {style.weight}
                     </span>
                     {isSelected && <Check className="w-4 h-4 text-yellow-400" />}
@@ -119,52 +160,79 @@ export const FrameStyleCustomizer: React.FC = () => {
             })}
           </div>
 
-          {/* Right Preview Card with Local Frame Image */}
+          {/* Right Interactive Preview Card */}
           <div className="lg:col-span-7 glass-panel rounded-3xl p-8 border border-zinc-800 flex flex-col justify-between relative overflow-hidden bg-gradient-to-b from-zinc-900/90 to-[#07070a]">
-            {/* Top Tag & Switcher */}
-            <div className="flex items-center justify-between mb-4 z-10">
-              <span className="px-3 py-1 rounded-full bg-yellow-400/20 text-yellow-400 text-xs font-mono font-bold border border-yellow-400/30">
+            {/* Top Tag & Interactive Lens Selector Buttons */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 z-10">
+              <span className="px-3 py-1 rounded-full bg-yellow-400/20 text-yellow-400 text-xs font-mono font-bold border border-yellow-400/30 w-fit">
                 {activeStyle.tag}
               </span>
 
-              {/* Lens Type selector */}
-              <div className="flex items-center gap-1 bg-zinc-900/90 p-1 rounded-xl border border-zinc-800 text-xs font-mono">
-                {(['blue-light', 'sunglasses', 'prescription'] as const).map((type) => (
-                  <button
-                    key={type}
-                    onClick={() => setLensType(type)}
-                    className={`px-3 py-1 rounded-lg transition-all capitalize ${
-                      lensType === type
-                        ? 'bg-yellow-400 text-black font-bold'
-                        : 'text-zinc-400 hover:text-white'
-                    }`}
-                  >
-                    {type.replace('-', ' ')}
-                  </button>
-                ))}
+              {/* Interactive Lens Type Switcher Buttons */}
+              <div className="flex items-center gap-1 bg-zinc-900/90 p-1.5 rounded-xl border border-zinc-800 text-xs font-mono">
+                {(['blue-light', 'sunglasses', 'prescription'] as const).map((type) => {
+                  const isActive = lensType === type;
+                  return (
+                    <button
+                      key={type}
+                      onClick={() => setLensType(type)}
+                      className={`px-3.5 py-1.5 rounded-lg transition-all capitalize font-semibold cursor-pointer ${
+                        isActive
+                          ? 'bg-yellow-400 text-black shadow-[0_0_12px_rgba(255,199,0,0.4)]'
+                          : 'text-zinc-400 hover:text-white hover:bg-zinc-800/60'
+                      }`}
+                    >
+                      {type === 'blue-light' ? 'Blue Light' : type === 'sunglasses' ? 'Sunglasses' : 'Prescription'}
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
-            {/* Frame Image Container - Using Local Public Frame Images */}
-            <div className="relative h-64 sm:h-80 flex items-center justify-center my-2 rounded-2xl overflow-hidden bg-black/60 border border-zinc-800">
+            {/* Frame Image Showcase Container with Real-Time Lens Filter */}
+            <div className="relative h-72 sm:h-96 flex items-center justify-center my-2 rounded-2xl overflow-hidden bg-black/80 border border-zinc-800/80 shadow-2xl">
+              {/* Dynamic Accent Lighting */}
               <div
-                className="absolute inset-0 blur-[90px] opacity-20 pointer-events-none transition-all duration-500"
+                className="absolute inset-0 blur-[100px] opacity-25 pointer-events-none transition-all duration-700"
                 style={{ backgroundColor: activeStyle.accentColor }}
               />
-              
+
+              {/* Active Product Image */}
               <img
                 key={activeStyle.id}
                 src={activeStyle.image}
                 alt={activeStyle.name}
-                className="relative z-10 w-full h-full object-cover rounded-xl transition-all duration-500"
+                className="relative z-10 w-full h-full object-contain p-4 transition-all duration-500 transform hover:scale-105"
               />
+
+              {/* Real-time Lens Filter Overlay Layer */}
+              <div
+                className={`absolute inset-0 z-20 transition-all duration-500 pointer-events-none border-2 ${currentLens.overlayClass}`}
+              />
+
+              {/* Active Lens Status Badge in top corner of image */}
+              <div className="absolute top-4 left-4 z-30 flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-950/80 border border-zinc-800 backdrop-blur-md text-[11px] font-mono text-zinc-300">
+                {currentLens.icon}
+                <span className="font-bold text-white">{currentLens.lensBadge}</span>
+              </div>
             </div>
 
-            {/* Bottom Specs & Description */}
+            {/* Bottom Specs, Description & Lens Info */}
             <div className="pt-6 border-t border-zinc-800/80 z-10 space-y-4">
-              <div>
-                <h3 className="text-2xl font-bold text-white font-heading">{activeStyle.name}</h3>
-                <p className="text-xs text-zinc-300 mt-1">{activeStyle.description}</p>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <h3 className="text-2xl font-bold text-white font-heading">{activeStyle.name}</h3>
+                  <p className="text-xs text-zinc-300 mt-1">{activeStyle.description}</p>
+                </div>
+              </div>
+
+              {/* Lens Explanation Banner */}
+              <div className="p-3 rounded-xl bg-zinc-900/80 border border-zinc-800 text-xs font-mono text-zinc-300 flex items-center gap-3">
+                <Sparkles className="w-4 h-4 text-yellow-400 shrink-0" />
+                <div>
+                  <span className="text-yellow-400 font-bold">{currentLens.label}: </span>
+                  <span>{currentLens.description}</span>
+                </div>
               </div>
 
               {/* Features list */}
@@ -172,7 +240,7 @@ export const FrameStyleCustomizer: React.FC = () => {
                 {activeStyle.features.map((feat) => (
                   <div
                     key={feat}
-                    className="flex items-center gap-2 text-[11px] font-mono text-zinc-300 bg-zinc-900/80 px-3 py-2 rounded-xl border border-zinc-800"
+                    className="flex items-center gap-2 text-[11px] font-mono text-zinc-300 bg-zinc-900/60 px-3 py-2 rounded-xl border border-zinc-800"
                   >
                     <Check className="w-3.5 h-3.5 text-yellow-400 shrink-0" />
                     <span>{feat}</span>
