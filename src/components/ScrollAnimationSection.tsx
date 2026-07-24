@@ -61,8 +61,8 @@ export const ScrollAnimationSection: React.FC<ScrollAnimationSectionProps> = ({ 
 
       {/* Sticky Viewport Stage */}
       <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex items-center justify-center p-4 sm:p-10 pointer-events-none">
-        {/* Framed Studio Canvas Container */}
-        <div className="relative z-10 w-full max-w-4xl h-[62vh] sm:h-[72vh] rounded-3xl glass-studio border border-zinc-800/80 p-2 sm:p-4 overflow-hidden flex items-center justify-center shadow-2xl pointer-events-none">
+        {/* Framed Studio Canvas Container with High Contrast Backdrop Blur */}
+        <div className="relative z-10 w-full max-w-4xl h-[62vh] sm:h-[72vh] rounded-3xl glass-studio bg-[#060609]/95 backdrop-blur-3xl border border-zinc-800/80 p-2 sm:p-4 overflow-hidden flex items-center justify-center shadow-2xl pointer-events-none">
           {/* Tactical Corner Frame Brackets */}
           <div className="absolute top-3 left-3 w-3.5 h-3.5 border-t-2 border-l-2 border-amber-400 z-20 pointer-events-none" />
           <div className="absolute top-3 right-3 w-3.5 h-3.5 border-t-2 border-r-2 border-amber-400 z-20 pointer-events-none" />

@@ -10,21 +10,21 @@ export const OverlayContent: React.FC<OverlayContentProps> = ({ progress }) => {
 
   return (
     <div className="absolute inset-0 z-20 pointer-events-none flex flex-col justify-between p-4 sm:p-8">
-      {/* Top Hero Title Banner */}
-      <div className="w-full flex flex-col items-center text-center pt-8 sm:pt-12 pointer-events-none">
+      {/* Top Hero Title Banner with Dark Glass Backdrop Blur */}
+      <div className="w-full flex flex-col items-center text-center pt-6 sm:pt-10 pointer-events-none">
         <div
           style={{
             opacity: heroOpacity,
             transform: `translateY(${(1 - heroOpacity) * -16}px)`,
             transition: 'opacity 0.2s ease-out, transform 0.2s ease-out',
           }}
-          className="max-w-2xl w-full pointer-events-none"
+          className="max-w-2xl w-full pointer-events-none px-6 py-4 rounded-3xl bg-zinc-950/90 backdrop-blur-2xl border border-zinc-800/80 shadow-2xl"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-zinc-950/90 text-amber-400 text-[11px] font-mono font-bold tracking-widest uppercase mb-3 border border-amber-500/40 backdrop-blur-xl shadow-lg">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-amber-500/10 text-amber-400 text-[11px] font-mono font-bold tracking-widest uppercase mb-2 border border-amber-500/40 backdrop-blur-xl">
             Mijia Smart Audio Eyewear
           </span>
 
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white font-heading leading-tight drop-shadow-2xl">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white font-heading leading-tight drop-shadow-2xl">
             Xiaomi Smart <span className="text-gradient-gold">Audio Glasses</span>
           </h1>
         </div>
