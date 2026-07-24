@@ -6,7 +6,12 @@ interface OverlayContentProps {
 }
 
 export const OverlayContent: React.FC<OverlayContentProps> = ({ progress }) => {
-  const heroOpacity = Math.max(0, 1 - progress / 0.15);
+  // Hero Title Fades out as user scrolls
+  const heroOpacity = Math.max(0, 1 - progress / 0.12);
+
+  // Side Feature Cards smoothly fade in & slide up after initial scroll (0.05 to 0.18)
+  const sideCardOpacity = Math.min(1, Math.max(0, (progress - 0.05) / 0.13));
+  const sideCardTranslateY = (1 - sideCardOpacity) * 28;
 
   return (
     <div className="absolute inset-0 z-20 pointer-events-none flex flex-col justify-between p-4 sm:p-8">
@@ -15,8 +20,8 @@ export const OverlayContent: React.FC<OverlayContentProps> = ({ progress }) => {
         <div
           style={{
             opacity: heroOpacity,
-            transform: `translateY(${(1 - heroOpacity) * -16}px)`,
-            transition: 'opacity 0.2s ease-out, transform 0.2s ease-out',
+            transform: `translateY(${(1 - heroOpacity) * -20}px)`,
+            transition: 'opacity 0.1s linear, transform 0.1s linear',
           }}
           className="max-w-2xl w-full pointer-events-none"
         >
@@ -30,10 +35,17 @@ export const OverlayContent: React.FC<OverlayContentProps> = ({ progress }) => {
         </div>
       </div>
 
-      {/* Center Layout: Left & Right Feature Highlight Cards */}
+      {/* Center Layout: Left & Right Feature Highlight Cards (Fade in on scroll) */}
       <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-6 pointer-events-none my-auto">
         {/* Left Feature Card: Acoustic Component Disassembly */}
-        <div className="glass-studio-gold rounded-2xl p-5 border border-amber-500/40 max-w-xs w-full hidden sm:block pointer-events-none shadow-2xl backdrop-blur-2xl bg-zinc-950/95 space-y-3">
+        <div
+          style={{
+            opacity: sideCardOpacity,
+            transform: `translateY(${sideCardTranslateY}px)`,
+            transition: 'opacity 0.1s linear, transform 0.1s linear',
+          }}
+          className="glass-studio-gold rounded-2xl p-5 border border-amber-500/40 max-w-xs w-full hidden sm:block pointer-events-none shadow-2xl backdrop-blur-2xl bg-zinc-950/95 space-y-3"
+        >
           <div className="flex items-center gap-2 border-b border-amber-500/30 pb-2.5">
             <Wrench className="w-4 h-4 text-amber-400" />
             <span className="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider">
@@ -62,7 +74,14 @@ export const OverlayContent: React.FC<OverlayContentProps> = ({ progress }) => {
         </div>
 
         {/* Right Feature Card: Modular Style Detachment */}
-        <div className="glass-studio rounded-2xl p-5 border border-zinc-800/80 max-w-xs w-full space-y-3 pointer-events-none shadow-2xl backdrop-blur-2xl bg-zinc-950/95">
+        <div
+          style={{
+            opacity: sideCardOpacity,
+            transform: `translateY(${sideCardTranslateY}px)`,
+            transition: 'opacity 0.1s linear, transform 0.1s linear',
+          }}
+          className="glass-studio rounded-2xl p-5 border border-zinc-800/80 max-w-xs w-full space-y-3 pointer-events-none shadow-2xl backdrop-blur-2xl bg-zinc-950/95"
+        >
           <div className="flex items-center gap-2 border-b border-zinc-800 pb-2.5">
             <Layers className="w-4 h-4 text-amber-400" />
             <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">
