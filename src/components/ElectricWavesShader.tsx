@@ -10,8 +10,9 @@ export const ElectricWavesShader: React.FC = () => {
 
     let renderer: THREE.WebGLRenderer;
     try {
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setClearColor(0x070709, 1.0);
       container.appendChild(renderer.domElement);
     } catch (err) {
       console.error('WebGL not supported', err);
@@ -28,6 +29,7 @@ export const ElectricWavesShader: React.FC = () => {
       }
     `;
 
+    // High precision GLSL Shader with Division-By-Zero GPU Guard (+ 0.001)
     const fragmentShader = `
       precision mediump float;
 
@@ -44,7 +46,8 @@ export const ElectricWavesShader: React.FC = () => {
         for (float i = 0.0; i < 20.0; i++) {
           if (i >= u_waveCount) break;
           uv.x += sin(u_time * (1.0 + i) + uv.y * u_frequency) * u_amplitude;
-          intensity += u_brightness / abs(uv.x);
+          // GPU Guard: Add 0.001 to prevent division by zero in WebGL drivers
+          intensity += u_brightness / (abs(uv.x) + 0.001);
         }
         return intensity;
       }
@@ -64,11 +67,13 @@ export const ElectricWavesShader: React.FC = () => {
       void main() {
         vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution) / min(u_resolution.x, u_resolution.y);
         vec3 col = scene(uv);
-        gl_FragColor = vec4(col, 1.0);
+        // Base dark background + vibrant GLSL wave color
+        vec3 bg = vec3(0.02, 0.02, 0.03);
+        gl_FragColor = vec4(bg + col, 1.0);
       }
     `;
 
-    // Hardcoded exact preset values from user screenshot
+    // Hardcoded exact preset values from 21st.dev
     const uniforms = {
       u_time: { value: 0 },
       u_resolution: { value: new THREE.Vector2() },
@@ -119,7 +124,8 @@ export const ElectricWavesShader: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 -z-10 pointer-events-none w-full h-full"
+      className="fixed inset-0 pointer-events-none w-full h-full"
+      style={{ zIndex: 0 }}
       aria-label="Interactive electric waves background"
     />
   );
