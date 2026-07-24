@@ -30,18 +30,30 @@ export const ScrollAnimationSection: React.FC<ScrollAnimationSectionProps> = ({ 
 
       setScrollProgress(rawProgress);
 
-      // PING-PONG BOOMERANG LOOP:
-      // 0.0 -> 0.5: Plays forward (Frame 1 -> 240, disassembling the glasses)
-      // 0.5 -> 1.0: Plays in reverse (Frame 240 -> 1, reassembling back to initial ezgif-frame-001)
-      let targetFrame = 0;
-      if (rawProgress <= 0.5) {
-        targetFrame = Math.floor((rawProgress / 0.5) * (frames.length - 1));
+      // 530 TIMELINE STEPS: 
+      // - 240 steps forward (Photo 0 to 239)
+      // - 50 steps HOLD on Frame 240 (photo 239 stays locked on screen)
+      // - 240 steps reverse (Photo 239 down to 0)
+      const TOTAL_TIMELINE_STEPS = 530;
+      const timelineStep = Math.min(
+        TOTAL_TIMELINE_STEPS - 1,
+        Math.floor(rawProgress * (TOTAL_TIMELINE_STEPS - 1))
+      );
+
+      let photoIndex = 0;
+      if (timelineStep < 240) {
+        // Phase 1: Forward (0 to 239)
+        photoIndex = timelineStep;
+      } else if (timelineStep < 290) {
+        // Phase 2: 50-step HOLD on frame 240
+        photoIndex = 239;
       } else {
-        targetFrame = Math.floor((1 - (rawProgress - 0.5) / 0.5) * (frames.length - 1));
+        // Phase 3: Reverse (239 down to 0)
+        photoIndex = 239 - (timelineStep - 290);
       }
 
-      targetFrame = Math.max(0, Math.min(frames.length - 1, targetFrame));
-      setCurrentFrameIndex(targetFrame);
+      photoIndex = Math.max(0, Math.min(frames.length - 1, photoIndex));
+      setCurrentFrameIndex(photoIndex);
     };
 
     const handleScroll = () => {
@@ -61,7 +73,7 @@ export const ScrollAnimationSection: React.FC<ScrollAnimationSectionProps> = ({ 
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[400vh] bg-transparent"
+      className="relative w-full h-[650vh] bg-transparent"
       id="story-animation"
     >
       <ScrollController scrollProgress={scrollProgress} />

@@ -4,6 +4,7 @@ import { Navbar } from './components/Navbar';
 import { ScrollAnimationSection } from './components/ScrollAnimationSection';
 import { AcousticTechDemo } from './components/AcousticTechDemo';
 import { FrameStyleCustomizer } from './components/FrameStyleCustomizer';
+import { ProductGallery } from './components/ProductGallery';
 import { TouchGestureDemo } from './components/TouchGestureDemo';
 import { TechSpecs } from './components/TechSpecs';
 import { BuySection } from './components/BuySection';
@@ -42,6 +43,9 @@ export const App: React.FC = () => {
 
         {/* Interactive 4 Frame Styles Switcher & Customizer */}
         <FrameStyleCustomizer />
+
+        {/* Luxury Product Photo & Macro Component Showcase */}
+        <ProductGallery />
 
         {/* Interactive Temple Gesture Simulator */}
         <TouchGestureDemo />
