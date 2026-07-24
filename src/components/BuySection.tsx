@@ -20,7 +20,7 @@ export const BuySection: React.FC = () => {
           </div>
 
           <h2 className="text-4xl sm:text-6xl font-extrabold text-white font-heading leading-tight mb-4 text-shadow-contrast">
-            Step Into <span className="text-gradient-gold">Acoustic Vision</span>
+            Step Into <span className="text-white">Acoustic Vision</span>
           </h2>
 
           <p className="text-zinc-200 text-sm sm:text-base text-shadow-subtle font-medium">

@@ -20,7 +20,7 @@ export const AcousticTechDemo: React.FC = () => {
 
           <h2 className="text-4xl sm:text-6xl font-extrabold text-white font-heading leading-tight mb-4 drop-shadow-2xl text-shadow-contrast">
             Private Sound Field. <br />
-            <span className="text-gradient-gold">Zero Ear Fatigue.</span>
+            <span className="text-white">Zero Ear Fatigue.</span>
           </h2>
 
           <p className="text-zinc-200 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto text-shadow-subtle font-medium">

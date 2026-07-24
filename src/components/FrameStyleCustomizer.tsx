@@ -108,7 +108,7 @@ export const FrameStyleCustomizer: React.FC = () => {
               <span>Modular Frame Detachment</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-heading text-shadow-contrast">
-              5 Styles. <span className="text-gradient-gold">One Acoustic Core.</span>
+              5 Styles. <span className="text-white">One Acoustic Core.</span>
             </h2>
           </div>
           <p className="text-zinc-200 text-sm max-w-md text-shadow-subtle font-medium">

@@ -25,7 +25,7 @@ export const OverlayContent: React.FC<OverlayContentProps> = ({ progress }) => {
           </span>
 
           <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white font-heading leading-tight drop-shadow-2xl">
-            Xiaomi Smart <span className="text-gradient-gold">Audio Glasses</span>
+            Xiaomi Smart <span className="text-white">Audio Glasses</span>
           </h1>
         </div>
       </div>

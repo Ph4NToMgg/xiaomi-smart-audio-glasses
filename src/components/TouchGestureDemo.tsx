@@ -55,7 +55,7 @@ export const TouchGestureDemo: React.FC = () => {
 
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-heading leading-tight text-shadow-contrast">
             Control Everything <br />
-            <span className="text-gradient-gold">With a Single Touch.</span>
+            <span className="text-white">With a Single Touch.</span>
           </h2>
         </div>
 
