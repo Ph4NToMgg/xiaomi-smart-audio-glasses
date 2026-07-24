@@ -129,14 +129,6 @@ export const OverlayContent: React.FC<OverlayContentProps> = ({ progress }) => {
           )}
         </div>
       </div>
-
-      {/* Bottom Footer Telemetry */}
-      <div className="w-full flex items-center justify-between text-[11px] font-mono text-zinc-500 pt-3 border-t border-zinc-900/80 pointer-events-none">
-        <span>
-          {progress < 0.5 ? 'SCROLL TO ROTATE 360° FRAME' : 'SCROLL TO EXPLODE COMPONENT VIEW'}
-        </span>
-        <span className="text-amber-400 font-bold">{Math.round(progress * 100)}% TIMELINE</span>
-      </div>
     </div>
   );
 };
