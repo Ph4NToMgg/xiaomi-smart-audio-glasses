@@ -9,18 +9,21 @@ export const AcousticTechDemo: React.FC = () => {
     <section id="acoustics" className="relative py-28 bg-transparent border-t border-zinc-900/60 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono font-bold uppercase tracking-widest mb-4 backdrop-blur-md">
+        <div className="text-center max-w-3xl mx-auto mb-16 relative">
+          {/* Ambient Dark Radial Vignette behind header */}
+          <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[700px] h-[250px] bg-black/60 rounded-full blur-[80px] pointer-events-none -z-10" />
+
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-950/90 border border-amber-500/40 text-amber-400 text-xs font-mono font-bold uppercase tracking-widest mb-4 backdrop-blur-md shadow-xl">
             <Radio className="w-4 h-4" />
             <span>Directional Sound Architecture</span>
           </div>
 
-          <h2 className="text-4xl sm:text-6xl font-extrabold text-white font-heading leading-tight mb-4 drop-shadow-lg">
+          <h2 className="text-4xl sm:text-6xl font-extrabold text-white font-heading leading-tight mb-4 drop-shadow-2xl text-shadow-contrast">
             Private Sound Field. <br />
             <span className="text-gradient-gold">Zero Ear Fatigue.</span>
           </h2>
 
-          <p className="text-zinc-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+          <p className="text-zinc-200 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto text-shadow-subtle font-medium">
             Xiaomi's proprietary reverse sound wave cancellation projects focused audio directly into your ear canal while outputting anti-phase waves to neutralize external leakage.
           </p>
         </div>
@@ -54,7 +57,7 @@ export const AcousticTechDemo: React.FC = () => {
                   className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
                     privacyMode
                       ? 'bg-amber-500/20 border-amber-400 text-white gold-border-glow'
-                      : 'bg-zinc-900/60 border-zinc-800 text-zinc-400 hover:border-zinc-700'
+                      : 'bg-zinc-950/80 border-zinc-800 text-zinc-400 hover:border-zinc-700'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-2">
@@ -72,7 +75,7 @@ export const AcousticTechDemo: React.FC = () => {
                   className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
                     !privacyMode
                       ? 'bg-red-500/20 border-red-500 text-white'
-                      : 'bg-zinc-900/60 border-zinc-800 text-zinc-400 hover:border-zinc-700'
+                      : 'bg-zinc-950/80 border-zinc-800 text-zinc-400 hover:border-zinc-700'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-2">
@@ -106,15 +109,15 @@ export const AcousticTechDemo: React.FC = () => {
 
             {/* Metrics Grid */}
             <div className="pt-4 border-t border-zinc-800/80 grid grid-cols-3 gap-3 text-center font-mono">
-              <div className="p-3 rounded-xl bg-zinc-900/80 border border-zinc-800">
+              <div className="p-3 rounded-xl bg-zinc-950/90 border border-zinc-800">
                 <div className="text-xl font-bold text-amber-400 font-heading">128mm²</div>
                 <div className="text-[10px] text-zinc-400">Driver Area</div>
               </div>
-              <div className="p-3 rounded-xl bg-zinc-900/80 border border-zinc-800">
+              <div className="p-3 rounded-xl bg-zinc-950/90 border border-zinc-800">
                 <div className="text-xl font-bold text-white font-heading">60Hz-20k</div>
                 <div className="text-[10px] text-zinc-400">Freq Range</div>
               </div>
-              <div className="p-3 rounded-xl bg-zinc-900/80 border border-zinc-800">
+              <div className="p-3 rounded-xl bg-zinc-950/90 border border-zinc-800">
                 <div className="text-xl font-bold text-amber-400 font-heading">&lt; 0.5s</div>
                 <div className="text-[10px] text-zinc-400">Latency</div>
               </div>

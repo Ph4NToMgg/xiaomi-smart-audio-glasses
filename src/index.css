@@ -34,6 +34,20 @@
   background: #F59E0B;
 }
 
+/* Text Readability Shadow Utilities for Ambient Canvas Wave Contrast */
+.text-shadow-contrast {
+  text-shadow: 
+    0 4px 25px rgba(0, 0, 0, 0.95),
+    0 2px 10px rgba(0, 0, 0, 0.95),
+    0 0 4px rgba(0, 0, 0, 1.0);
+}
+
+.text-shadow-subtle {
+  text-shadow: 
+    0 2px 12px rgba(0, 0, 0, 0.9),
+    0 1px 4px rgba(0, 0, 0, 0.95);
+}
+
 /* High-Contrast Luxury Glassmorphism Studio Styling */
 .glass-studio {
   background: linear-gradient(135deg, rgba(16, 16, 22, 0.92) 0%, rgba(8, 8, 12, 0.96) 100%);

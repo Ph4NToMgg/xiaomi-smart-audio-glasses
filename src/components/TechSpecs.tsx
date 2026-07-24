@@ -49,11 +49,14 @@ export const TechSpecs: React.FC = () => {
   return (
     <section id="specs" className="py-28 bg-transparent border-t border-zinc-900/60">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-heading mb-4">
+        <div className="text-center max-w-2xl mx-auto mb-16 relative">
+          {/* Ambient Dark Radial Vignette behind header */}
+          <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[650px] h-[250px] bg-black/60 rounded-full blur-[80px] pointer-events-none -z-10" />
+
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-heading mb-4 text-shadow-contrast">
             Technical <span className="text-gradient-gold">Specifications</span>
           </h2>
-          <p className="text-zinc-300 text-sm">
+          <p className="text-zinc-200 text-sm text-shadow-subtle font-medium">
             Engineered down to the millimeter for peak acoustic output, ergonomic balance, and all-day comfort.
           </p>
         </div>

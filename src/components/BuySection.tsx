@@ -10,17 +10,20 @@ export const BuySection: React.FC = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-yellow-500/10 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/90 border border-yellow-500/30 text-yellow-400 text-xs font-semibold uppercase tracking-wider mb-4 backdrop-blur-md">
+        <div className="text-center max-w-2xl mx-auto mb-16 relative">
+          {/* Ambient Dark Radial Vignette behind header */}
+          <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[700px] h-[250px] bg-black/60 rounded-full blur-[80px] pointer-events-none -z-10" />
+
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-950/90 border border-yellow-500/30 text-yellow-400 text-xs font-semibold uppercase tracking-wider mb-4 backdrop-blur-md shadow-xl">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Launch Pre-Order Package</span>
           </div>
 
-          <h2 className="text-4xl sm:text-6xl font-extrabold text-white font-heading leading-tight mb-4">
+          <h2 className="text-4xl sm:text-6xl font-extrabold text-white font-heading leading-tight mb-4 text-shadow-contrast">
             Step Into <span className="text-gradient-gold">Acoustic Vision</span>
           </h2>
 
-          <p className="text-zinc-300 text-sm sm:text-base">
+          <p className="text-zinc-200 text-sm sm:text-base text-shadow-subtle font-medium">
             Includes 1-Year Xiaomi Official Warranty, 30-Day Money-Back Guarantee, and Free Express Global Shipping.
           </p>
         </div>

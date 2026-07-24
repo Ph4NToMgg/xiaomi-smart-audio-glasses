@@ -98,17 +98,20 @@ export const FrameStyleCustomizer: React.FC = () => {
     <section id="frames" className="py-24 bg-transparent border-t border-zinc-900/60 relative">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 relative">
+          {/* Ambient Dark Radial Vignette behind header */}
+          <div className="absolute -top-10 left-0 w-[500px] h-[200px] bg-black/60 rounded-full blur-[80px] pointer-events-none -z-10" />
+
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/90 border border-yellow-500/30 text-yellow-400 text-xs font-semibold uppercase tracking-wider mb-4 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-950/90 border border-yellow-500/30 text-yellow-400 text-xs font-semibold uppercase tracking-wider mb-4 backdrop-blur-md shadow-xl">
               <RefreshCw className="w-3.5 h-3.5 animate-spin-slow" />
               <span>Modular Frame Detachment</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-heading">
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-heading text-shadow-contrast">
               5 Styles. <span className="text-gradient-gold">One Acoustic Core.</span>
             </h2>
           </div>
-          <p className="text-zinc-300 text-sm max-w-md">
+          <p className="text-zinc-200 text-sm max-w-md text-shadow-subtle font-medium">
             Detach the acoustic smart temples with a single click and swap between Browline, Pilot, Round, or Titanium frames instantly.
           </p>
         </div>

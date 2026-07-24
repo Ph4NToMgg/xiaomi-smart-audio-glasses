@@ -44,13 +44,16 @@ export const TouchGestureDemo: React.FC = () => {
   return (
     <section id="gestures" className="py-28 bg-transparent border-t border-zinc-900/60">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/90 border border-yellow-500/30 text-yellow-400 text-xs font-semibold uppercase tracking-wider mb-4 backdrop-blur-md">
+        <div className="text-center max-w-2xl mx-auto mb-16 relative">
+          {/* Ambient Dark Radial Vignette behind header */}
+          <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[650px] h-[250px] bg-black/60 rounded-full blur-[80px] pointer-events-none -z-10" />
+
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-950/90 border border-yellow-500/30 text-yellow-400 text-xs font-semibold uppercase tracking-wider mb-4 backdrop-blur-md shadow-xl">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Capacitive Touch Haptics</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-heading leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-heading leading-tight text-shadow-contrast">
             Control Everything <br />
             <span className="text-gradient-gold">With a Single Touch.</span>
           </h2>
