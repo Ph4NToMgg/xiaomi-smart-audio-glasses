@@ -2,22 +2,19 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
 interface ElectricWavesShaderProps {
-  opacity?: number;
+  embedded?: boolean;
 }
 
-export const ElectricWavesShader: React.FC<ElectricWavesShaderProps> = ({
-  opacity = 0.85,
-}) => {
+export const ElectricWavesShader: React.FC<ElectricWavesShaderProps> = ({ embedded = false }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const materialRef = useRef<THREE.ShaderMaterial | null>(null);
 
-  // Exact shader parameters from 21st.dev "Colorful Wave Pattern"
+  // Exact parameters from 21st.dev "Colorful Wave Pattern"
   const [waveCount, setWaveCount] = useState(5.0);
   const [amplitude, setAmplitude] = useState(0.19);
   const [frequency, setFrequency] = useState(5.1);
   const [brightness, setBrightness] = useState(0.00509);
   const [colorSeparation, setColorSeparation] = useState(0.04);
-  const [showControls, setShowControls] = useState(true);
 
   // Sync React state → shader uniforms
   useEffect(() => {
@@ -36,7 +33,7 @@ export const ElectricWavesShader: React.FC<ElectricWavesShaderProps> = ({
 
     let renderer: THREE.WebGLRenderer;
     try {
-      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       container.appendChild(renderer.domElement);
     } catch (err) {
@@ -48,7 +45,6 @@ export const ElectricWavesShader: React.FC<ElectricWavesShaderProps> = ({
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
     const clock = new THREE.Clock();
 
-    // GLSL 100 Shaders from 21st.dev
     const vertexShader = `
       void main() {
         gl_Position = vec4(position, 1.0);
@@ -143,26 +139,25 @@ export const ElectricWavesShader: React.FC<ElectricWavesShaderProps> = ({
     };
   }, []);
 
-  // Styles matching exact 21st.dev control panel
   const controlPanelStyle: React.CSSProperties = {
-    position: 'fixed',
-    bottom: '30px',
+    position: 'absolute',
+    bottom: '24px',
     left: '50%',
     transform: 'translateX(-50%)',
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
     backdropFilter: 'blur(16px)',
     WebkitBackdropFilter: 'blur(16px)',
     border: '1px solid rgba(255, 255, 255, 0.15)',
-    padding: '16px 24px',
+    padding: '16px 20px',
     borderRadius: '16px',
     display: 'flex',
     flexDirection: 'column',
-    gap: '12px',
+    gap: '10px',
     color: 'white',
     fontFamily: 'sans-serif',
-    width: '320px',
-    zIndex: 40,
-    boxShadow: '0 20px 50px rgba(0,0,0,0.8)',
+    width: '300px',
+    zIndex: 30,
+    boxShadow: '0 20px 50px rgba(0,0,0,0.9)',
   };
 
   const labelStyle: React.CSSProperties = {
@@ -170,7 +165,7 @@ export const ElectricWavesShader: React.FC<ElectricWavesShaderProps> = ({
     justifyContent: 'space-between',
     fontSize: '12px',
     fontWeight: 'bold',
-    marginBottom: '4px',
+    marginBottom: '3px',
   };
 
   const sliderStyle: React.CSSProperties = {
@@ -180,107 +175,106 @@ export const ElectricWavesShader: React.FC<ElectricWavesShaderProps> = ({
   };
 
   return (
-    <>
-      {/* Background WebGL Shader Canvas Container */}
+    <section className="relative w-full h-[650px] bg-black overflow-hidden border-y border-zinc-800 my-16">
+      {/* 100% Visible WebGL Shader Canvas Container */}
       <div
         ref={containerRef}
-        className="fixed inset-0 -z-10 pointer-events-none transition-opacity duration-700"
-        style={{ opacity }}
+        className="absolute inset-0 w-full h-full"
         aria-label="Interactive electric waves background"
       />
 
-      {/* Control Panel Toggle Button */}
-      <button
-        onClick={() => setShowControls(!showControls)}
-        className="fixed bottom-6 right-6 z-50 px-4 py-2.5 rounded-full bg-zinc-900/90 border border-red-500/40 text-red-400 font-mono text-xs font-bold backdrop-blur-xl shadow-2xl hover:border-red-400 transition-all cursor-pointer"
-      >
-        {showControls ? 'Hide Shader Controls' : 'Show Shader Controls'}
-      </button>
+      {/* Section Overlay Badge */}
+      <div className="absolute top-8 left-1/2 -translate-x-1/2 z-20 text-center pointer-events-none px-4">
+        <span className="px-3.5 py-1.5 rounded-full bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-mono font-bold uppercase tracking-widest backdrop-blur-md">
+          21st.dev Interactive Shader Engine
+        </span>
+        <h3 className="text-2xl sm:text-4xl font-extrabold text-white font-heading mt-2 drop-shadow-lg">
+          Acoustic Wave Pattern Synthesizer
+        </h3>
+      </div>
 
       {/* Exact Floating Control Panel from 21st.dev */}
-      {showControls && (
-        <div style={controlPanelStyle} className="pointer-events-auto">
-          <div>
-            <div style={labelStyle}>
-              <span>Wave Count</span>
-              <span>{waveCount.toFixed(1)}</span>
-            </div>
-            <input
-              type="range"
-              min="1"
-              max="20"
-              step="1"
-              value={waveCount}
-              onChange={(e) => setWaveCount(parseFloat(e.target.value))}
-              style={sliderStyle}
-            />
+      <div style={controlPanelStyle}>
+        <div>
+          <div style={labelStyle}>
+            <span>Wave Count</span>
+            <span>{waveCount.toFixed(1)}</span>
           </div>
-
-          <div>
-            <div style={labelStyle}>
-              <span>Amplitude</span>
-              <span>{amplitude.toFixed(2)}</span>
-            </div>
-            <input
-              type="range"
-              min="0.01"
-              max="0.5"
-              step="0.01"
-              value={amplitude}
-              onChange={(e) => setAmplitude(parseFloat(e.target.value))}
-              style={sliderStyle}
-            />
-          </div>
-
-          <div>
-            <div style={labelStyle}>
-              <span>Frequency</span>
-              <span>{frequency.toFixed(1)}</span>
-            </div>
-            <input
-              type="range"
-              min="0.5"
-              max="10"
-              step="0.1"
-              value={frequency}
-              onChange={(e) => setFrequency(parseFloat(e.target.value))}
-              style={sliderStyle}
-            />
-          </div>
-
-          <div>
-            <div style={labelStyle}>
-              <span>Brightness</span>
-              <span>{brightness.toFixed(5)}</span>
-            </div>
-            <input
-              type="range"
-              min="0.00001"
-              max="0.01"
-              step="0.00001"
-              value={brightness}
-              onChange={(e) => setBrightness(parseFloat(e.target.value))}
-              style={sliderStyle}
-            />
-          </div>
-
-          <div>
-            <div style={labelStyle}>
-              <span>Color Separation</span>
-              <span>{colorSeparation.toFixed(2)}</span>
-            </div>
-            <input
-              type="range"
-              min="0.0"
-              max="0.5"
-              step="0.01"
-              value={colorSeparation}
-              onChange={(e) => setColorSeparation(parseFloat(e.target.value))}
-              style={sliderStyle}
-            />
-          </div>
+          <input
+            type="range"
+            min="1"
+            max="20"
+            step="1"
+            value={waveCount}
+            onChange={(e) => setWaveCount(parseFloat(e.target.value))}
+            style={sliderStyle}
+          />
         </div>
-      )}
-    </>
+
+        <div>
+          <div style={labelStyle}>
+            <span>Amplitude</span>
+            <span>{amplitude.toFixed(2)}</span>
+          </div>
+          <input
+            type="range"
+            min="0.01"
+            max="0.5"
+            step="0.01"
+            value={amplitude}
+            onChange={(e) => setAmplitude(parseFloat(e.target.value))}
+            style={sliderStyle}
+          />
+        </div>
+
+        <div>
+          <div style={labelStyle}>
+            <span>Frequency</span>
+            <span>{frequency.toFixed(1)}</span>
+          </div>
+          <input
+            type="range"
+            min="0.5"
+            max="10"
+            step="0.1"
+            value={frequency}
+            onChange={(e) => setFrequency(parseFloat(e.target.value))}
+            style={sliderStyle}
+          />
+        </div>
+
+        <div>
+          <div style={labelStyle}>
+            <span>Brightness</span>
+            <span>{brightness.toFixed(5)}</span>
+          </div>
+          <input
+            type="range"
+            min="0.00001"
+            max="0.01"
+            step="0.00001"
+            value={brightness}
+            onChange={(e) => setBrightness(parseFloat(e.target.value))}
+            style={sliderStyle}
+          />
+        </div>
+
+        <div>
+          <div style={labelStyle}>
+            <span>Color Separation</span>
+            <span>{colorSeparation.toFixed(2)}</span>
+          </div>
+          <input
+            type="range"
+            min="0.0"
+            max="0.5"
+            step="0.01"
+            value={colorSeparation}
+            onChange={(e) => setColorSeparation(parseFloat(e.target.value))}
+            style={sliderStyle}
+          />
+        </div>
+      </div>
+    </section>
   );
 };

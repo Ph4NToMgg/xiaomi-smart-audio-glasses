@@ -19,10 +19,7 @@ export const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-red-500 selection:text-white relative">
-      {/* 21st.dev Vibrant Colorful Electric Waves WebGL Background Shader */}
-      <ElectricWavesShader opacity={0.85} />
-
+    <div className="min-h-screen bg-[#070709] text-white selection:bg-red-500 selection:text-white">
       {/* Batched Frame Preloader Overlay */}
       <FrameLoader totalFrames={TOTAL_FRAMES} onFramesLoaded={handleFramesLoaded} />
 
@@ -31,6 +28,9 @@ export const App: React.FC = () => {
 
       {/* Hero Scroll-Driven Frame Animation Section */}
       <ScrollAnimationSection frames={loadedImages} />
+
+      {/* 21st.dev Interactive WebGL Colorful Wave Pattern Shader Studio Section */}
+      <ElectricWavesShader />
 
       {/* Interactive Sound Privacy Acoustic Engine Showcase */}
       <AcousticTechDemo />
