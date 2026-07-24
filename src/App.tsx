@@ -19,9 +19,9 @@ export const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#070709] text-white selection:bg-amber-400 selection:text-black relative">
-      {/* Three.js WebGL Electric Waves Ambient Background Shader */}
-      <ElectricWavesShader opacity={0.45} showControlsToggle={true} />
+    <div className="min-h-screen bg-black text-white selection:bg-red-500 selection:text-white relative">
+      {/* 21st.dev Vibrant Colorful Electric Waves WebGL Background Shader */}
+      <ElectricWavesShader opacity={0.85} />
 
       {/* Batched Frame Preloader Overlay */}
       <FrameLoader totalFrames={TOTAL_FRAMES} onFramesLoaded={handleFramesLoaded} />
