@@ -19,36 +19,42 @@ export const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#070709] text-white selection:bg-red-500 selection:text-white">
-      {/* Batched Frame Preloader Overlay */}
-      <FrameLoader totalFrames={TOTAL_FRAMES} onFramesLoaded={handleFramesLoaded} />
+    <div className="min-h-screen text-white selection:bg-amber-400 selection:text-black relative">
+      {/* Layer 1: Deep Solid Obsidian Background (-z-20) */}
+      <div className="fixed inset-0 -z-20 bg-[#060608] pointer-events-none" />
 
-      {/* Main Navigation Header Bar */}
-      <Navbar />
-
-      {/* Hero Scroll-Driven Frame Animation Section */}
-      <ScrollAnimationSection frames={loadedImages} />
-
-      {/* 21st.dev Interactive WebGL Colorful Wave Pattern Shader Studio Section */}
+      {/* Layer 2: Three.js WebGL Electric Waves Ambient Shader (-z-10) */}
       <ElectricWavesShader />
 
-      {/* Interactive Sound Privacy Acoustic Engine Showcase */}
-      <AcousticTechDemo />
+      {/* Layer 3: Main Page Content & Foreground Components (z-0) */}
+      <div className="relative z-0">
+        {/* Batched Frame Preloader Overlay */}
+        <FrameLoader totalFrames={TOTAL_FRAMES} onFramesLoaded={handleFramesLoaded} />
 
-      {/* Interactive 4 Frame Styles Switcher & Customizer */}
-      <FrameStyleCustomizer />
+        {/* Main Navigation Header Bar */}
+        <Navbar />
 
-      {/* Interactive Temple Gesture Simulator */}
-      <TouchGestureDemo />
+        {/* Hero Scroll-Driven Frame Animation Section */}
+        <ScrollAnimationSection frames={loadedImages} />
 
-      {/* Full Technical Specifications Sheet */}
-      <TechSpecs />
+        {/* Interactive Sound Privacy Acoustic Engine Showcase */}
+        <AcousticTechDemo />
 
-      {/* Pre-Order & Purchase Package Options */}
-      <BuySection />
+        {/* Interactive 4 Frame Styles Switcher & Customizer */}
+        <FrameStyleCustomizer />
 
-      {/* Minimalist Luxury Footer */}
-      <Footer />
+        {/* Interactive Temple Gesture Simulator */}
+        <TouchGestureDemo />
+
+        {/* Full Technical Specifications Sheet */}
+        <TechSpecs />
+
+        {/* Pre-Order & Purchase Package Options */}
+        <BuySection />
+
+        {/* Minimalist Luxury Footer */}
+        <Footer />
+      </div>
     </div>
   );
 };
