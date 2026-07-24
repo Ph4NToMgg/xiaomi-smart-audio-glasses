@@ -19,62 +19,58 @@ export const CanvasRenderer: React.FC<CanvasRendererProps> = ({
     const canvas = canvasRef.current;
     if (!canvas || frames.length === 0) return;
 
-    const ctx = canvas.getContext('2d', { alpha: false, willReadFrequently: false });
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
     const validIndex = Math.max(0, Math.min(frames.length - 1, Math.floor(currentFrameIndex)));
     const img = frames[validIndex];
     if (!img || !img.complete || img.naturalWidth === 0) return;
 
-    // Detect exact device pixel ratio (up to 2x for Retina sharpness)
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const displayWidth = window.innerWidth;
-    const displayHeight = window.innerHeight;
+    const containerWidth = canvas.parentElement?.clientWidth || window.innerWidth;
+    const containerHeight = canvas.parentElement?.clientHeight || window.innerHeight;
 
-    const targetBufferWidth = Math.floor(displayWidth * dpr);
-    const targetBufferHeight = Math.floor(displayHeight * dpr);
+    const targetBufferW = Math.floor(containerWidth * dpr);
+    const targetBufferH = Math.floor(containerHeight * dpr);
 
-    // Sync buffer resolution and explicit style dimensions to prevent subpixel blur
-    if (canvas.width !== targetBufferWidth || canvas.height !== targetBufferHeight) {
-      canvas.width = targetBufferWidth;
-      canvas.height = targetBufferHeight;
-      canvas.style.width = `${displayWidth}px`;
-      canvas.style.height = `${displayHeight}px`;
+    if (canvas.width !== targetBufferW || canvas.height !== targetBufferH) {
+      canvas.width = targetBufferW;
+      canvas.height = targetBufferH;
+      canvas.style.width = `${containerWidth}px`;
+      canvas.style.height = `${containerHeight}px`;
     }
 
-    // Direct buffer pixel drawing (1:1 precision, zero double-interpolation)
-    const bufferW = canvas.width;
-    const bufferH = canvas.height;
+    ctx.save();
+    ctx.scale(dpr, dpr);
 
     // Clear background
-    ctx.fillStyle = '#050507';
-    ctx.fillRect(0, 0, bufferW, bufferH);
+    ctx.clearRect(0, 0, containerWidth, containerHeight);
 
-    // Calculate Aspect Ratio Cover
+    // CRISP CONTAIN FIT: Image fits inside container without over-zooming pixels
     const imgW = img.naturalWidth;
     const imgH = img.naturalHeight;
     const imgAspect = imgW / imgH;
-    const canvasAspect = bufferW / bufferH;
+    const containerAspect = containerWidth / containerHeight;
 
-    let drawW: number;
-    let drawH: number;
+    let drawW = containerWidth;
+    let drawH = containerHeight;
 
-    if (canvasAspect > imgAspect) {
-      drawW = bufferW;
-      drawH = bufferW / imgAspect;
+    if (containerAspect > imgAspect) {
+      drawH = containerHeight;
+      drawW = containerHeight * imgAspect;
     } else {
-      drawH = bufferH;
-      drawW = bufferH * imgAspect;
+      drawW = containerWidth;
+      drawH = containerWidth / imgAspect;
     }
 
-    const drawX = Math.floor((bufferW - drawW) / 2);
-    const drawY = Math.floor((bufferH - drawH) / 2);
+    const drawX = (containerWidth - drawW) / 2;
+    const drawY = (containerHeight - drawH) / 2;
 
-    // High quality bicubic smoothing
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = 'high';
-
     ctx.drawImage(img, drawX, drawY, drawW, drawH);
+
+    ctx.restore();
 
     lastDrawnFrameRef.current = validIndex;
   };
@@ -105,10 +101,10 @@ export const CanvasRenderer: React.FC<CanvasRendererProps> = ({
   }, []);
 
   return (
-    <div className="absolute inset-0 w-full h-full overflow-hidden bg-[#050507] flex items-center justify-center">
+    <div className="relative w-full h-full flex items-center justify-center pointer-events-none">
       <canvas
         ref={canvasRef}
-        className="block touch-none select-none"
+        className="block max-w-full max-h-full object-contain rounded-2xl drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
       />
     </div>
   );
