@@ -8,6 +8,7 @@ import { TouchGestureDemo } from './components/TouchGestureDemo';
 import { TechSpecs } from './components/TechSpecs';
 import { BuySection } from './components/BuySection';
 import { Footer } from './components/Footer';
+import { ElectricWavesShader } from './components/ElectricWavesShader';
 
 export const App: React.FC = () => {
   const [loadedImages, setLoadedImages] = useState<HTMLImageElement[]>([]);
@@ -18,20 +19,23 @@ export const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#050507] text-white selection:bg-yellow-400 selection:text-black">
+    <div className="min-h-screen bg-[#070709] text-white selection:bg-amber-400 selection:text-black relative">
+      {/* Three.js WebGL Electric Waves Ambient Background Shader */}
+      <ElectricWavesShader opacity={0.45} showControlsToggle={true} />
+
       {/* Batched Frame Preloader Overlay */}
       <FrameLoader totalFrames={TOTAL_FRAMES} onFramesLoaded={handleFramesLoaded} />
 
-      {/* Main Header Bar */}
+      {/* Main Navigation Header Bar */}
       <Navbar />
 
-      {/* Hero Scroll-Driven Frame Animation Section (450vh sticky viewport timeline) */}
+      {/* Hero Scroll-Driven Frame Animation Section */}
       <ScrollAnimationSection frames={loadedImages} />
 
       {/* Interactive Sound Privacy Acoustic Engine Showcase */}
       <AcousticTechDemo />
 
-      {/* Interactive 5 Frame Styles Switcher & Customizer */}
+      {/* Interactive 4 Frame Styles Switcher & Customizer */}
       <FrameStyleCustomizer />
 
       {/* Interactive Temple Gesture Simulator */}
@@ -43,7 +47,7 @@ export const App: React.FC = () => {
       {/* Pre-Order & Purchase Package Options */}
       <BuySection />
 
-      {/* Minimalist Footer */}
+      {/* Minimalist Luxury Footer */}
       <Footer />
     </div>
   );
