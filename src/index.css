@@ -12,7 +12,6 @@
     font-family: var(--font-sans);
     background-color: #070709;
     color: #f1f5f9;
-    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, .font-heading {
@@ -35,21 +34,21 @@
   background: #F59E0B;
 }
 
-/* Luxury Glassmorphism */
+/* Luxury Glassmorphism Studio Styling */
 .glass-studio {
-  background: linear-gradient(135deg, rgba(18, 18, 24, 0.75) 0%, rgba(10, 10, 15, 0.85) 100%);
+  background: linear-gradient(135deg, rgba(20, 20, 28, 0.8) 0%, rgba(10, 10, 15, 0.9) 100%);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
 }
 
 .glass-studio-gold {
-  background: linear-gradient(135deg, rgba(28, 24, 16, 0.8) 0%, rgba(15, 13, 10, 0.9) 100%);
+  background: linear-gradient(135deg, rgba(32, 26, 16, 0.85) 0%, rgba(15, 12, 8, 0.95) 100%);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(245, 158, 11, 0.3);
-  box-shadow: 0 20px 50px rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  box-shadow: 0 20px 50px rgba(245, 158, 11, 0.15);
 }
 
 .glass-badge {
@@ -83,15 +82,15 @@
 }
 
 .gold-border-glow {
-  box-shadow: 0 0 15px rgba(245, 158, 11, 0.35), inset 0 0 15px rgba(245, 158, 11, 0.1);
+  box-shadow: 0 0 18px rgba(245, 158, 11, 0.4), inset 0 0 18px rgba(245, 158, 11, 0.12);
 }
 
 /* Ambient Background Lights */
 .bg-mesh-glow {
   background-image: 
-    radial-gradient(at 10% 20%, rgba(245, 158, 11, 0.12) 0px, transparent 50%),
-    radial-gradient(at 90% 80%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
-    radial-gradient(at 50% 50%, rgba(255, 199, 0, 0.05) 0px, transparent 50%);
+    radial-gradient(at 10% 20%, rgba(245, 158, 11, 0.14) 0px, transparent 50%),
+    radial-gradient(at 90% 80%, rgba(56, 189, 248, 0.1) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(255, 199, 0, 0.06) 0px, transparent 50%);
 }
 
 /* Tactical Grid overlay */
