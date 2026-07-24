@@ -47,7 +47,7 @@ export const TechSpecs: React.FC = () => {
   };
 
   return (
-    <section id="specs" className="py-28 bg-[#050507] border-t border-zinc-900">
+    <section id="specs" className="py-28 bg-transparent border-t border-zinc-900/60">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-heading mb-4">

@@ -7,7 +7,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#030304] border-t border-zinc-900 py-16 text-zinc-400 font-mono text-xs">
+    <footer className="bg-transparent border-t border-zinc-900/60 py-16 text-zinc-400 font-mono text-xs">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-start justify-between gap-10 mb-12">
           {/* Brand Left */}

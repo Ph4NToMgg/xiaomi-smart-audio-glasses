@@ -6,7 +6,7 @@ export const BuySection: React.FC = () => {
   const [selectedColor, setSelectedColor] = useState('Matte Obsidian Black');
 
   return (
-    <section id="buy" className="py-28 bg-[#07070a] border-t border-zinc-900 relative overflow-hidden">
+    <section id="buy" className="py-28 bg-transparent border-t border-zinc-900/60 relative overflow-hidden">
       {/* Background ambient yellow radial spotlight */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-yellow-500/10 rounded-full blur-[150px] pointer-events-none" />
 

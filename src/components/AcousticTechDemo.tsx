@@ -1,29 +1,26 @@
 import React, { useState } from 'react';
-import { Volume2, ShieldCheck, Waves, Radio, Activity, Sparkles, Disc, Lock, Unlock } from 'lucide-react';
+import { Volume2, ShieldCheck, Waves, Radio, Activity, Sparkles, Lock, Unlock } from 'lucide-react';
 
 export const AcousticTechDemo: React.FC = () => {
   const [privacyMode, setPrivacyMode] = useState(true);
-  const [activeFrequency, setActiveFrequency] = useState(1000); // 1kHz default
+  const [activeFrequency, setActiveFrequency] = useState(1000);
 
   return (
-    <section id="acoustics" className="relative py-28 bg-[#08080c] border-t border-zinc-900 overflow-hidden bg-mesh-glow">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[160px] pointer-events-none" />
-
+    <section id="acoustics" className="relative py-28 bg-transparent border-t border-zinc-900/60 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono font-bold uppercase tracking-widest mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono font-bold uppercase tracking-widest mb-4 backdrop-blur-md">
             <Radio className="w-4 h-4" />
             <span>Directional Sound Architecture</span>
           </div>
 
-          <h2 className="text-4xl sm:text-6xl font-extrabold text-white font-heading leading-tight mb-4">
+          <h2 className="text-4xl sm:text-6xl font-extrabold text-white font-heading leading-tight mb-4 drop-shadow-lg">
             Private Sound Field. <br />
             <span className="text-gradient-gold">Zero Ear Fatigue.</span>
           </h2>
 
-          <p className="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+          <p className="text-zinc-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
             Xiaomi's proprietary reverse sound wave cancellation projects focused audio directly into your ear canal while outputting anti-phase waves to neutralize external leakage.
           </p>
         </div>
@@ -129,27 +126,25 @@ export const AcousticTechDemo: React.FC = () => {
             {/* Visual Ear Diagram & Beam Lines */}
             <div className="relative w-full max-w-md h-72 flex items-center justify-center">
               {/* Central Ear Silhouette Icon */}
-              <div className="relative z-10 w-28 h-28 rounded-full bg-zinc-950 border-2 border-amber-500/50 flex flex-col items-center justify-center gold-glow">
+              <div className="relative z-10 w-28 h-28 rounded-full bg-zinc-950/90 border-2 border-amber-500/50 flex flex-col items-center justify-center gold-glow">
                 <Waves className="w-10 h-10 text-amber-400 animate-pulse" />
                 <span className="text-[10px] font-mono text-zinc-400 mt-1 font-bold">EAR CANAL</span>
               </div>
 
               {/* Sound Rays */}
               {privacyMode ? (
-                // Focused Privacy Rays
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                   <div className="w-56 h-56 rounded-full border border-amber-400/40 animate-ping opacity-30" />
                   <div className="w-72 h-72 rounded-full border border-dashed border-amber-400/20" />
-                  <div className="absolute top-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-400 text-[11px] font-mono font-bold flex items-center gap-1.5">
+                  <div className="absolute top-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-400 text-[11px] font-mono font-bold flex items-center gap-1.5 backdrop-blur-md">
                     <ShieldCheck className="w-3.5 h-3.5" />
                     <span>✓ Anti-Phase Sound Beam Active</span>
                   </div>
                 </div>
               ) : (
-                // Standard Wide Dispersion
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                   <div className="w-72 h-72 rounded-full border-2 border-red-500/40 animate-pulse opacity-50" />
-                  <div className="absolute top-2 px-3 py-1 rounded-full bg-red-500/20 border border-red-500/40 text-red-400 text-[11px] font-mono font-bold">
+                  <div className="absolute top-2 px-3 py-1 rounded-full bg-red-500/20 border border-red-500/40 text-red-400 text-[11px] font-mono font-bold backdrop-blur-md">
                     ⚠ Ambient Sound Leakage Detected
                   </div>
                 </div>
@@ -172,7 +167,7 @@ export const AcousticTechDemo: React.FC = () => {
               </div>
             </div>
 
-            <p className="text-xs font-mono text-zinc-400 text-center mt-6 max-w-sm">
+            <p className="text-xs font-mono text-zinc-300 text-center mt-6 max-w-sm">
               {privacyMode
                 ? 'Sound energy is tightly focused into ear canal. Ambient sound leak minimized.'
                 : 'Wide sound wave dispersion. People nearby may hear audio output.'}

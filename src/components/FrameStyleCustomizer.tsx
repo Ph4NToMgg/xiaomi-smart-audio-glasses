@@ -95,7 +95,7 @@ export const FrameStyleCustomizer: React.FC = () => {
   const currentLens = lensConfigs[lensType];
 
   return (
-    <section id="frames" className="py-24 bg-[#050507] border-t border-zinc-900 relative">
+    <section id="frames" className="py-24 bg-transparent border-t border-zinc-900/60 relative">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">

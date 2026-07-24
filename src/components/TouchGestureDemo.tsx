@@ -42,7 +42,7 @@ export const TouchGestureDemo: React.FC = () => {
   const current = gestures.find((g) => g.id === activeGesture)!;
 
   return (
-    <section id="gestures" className="py-28 bg-[#07070a] border-t border-zinc-900">
+    <section id="gestures" className="py-28 bg-transparent border-t border-zinc-900/60">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-xs font-semibold uppercase tracking-wider mb-4">

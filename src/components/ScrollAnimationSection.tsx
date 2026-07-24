@@ -25,7 +25,6 @@ export const ScrollAnimationSection: React.FC<ScrollAnimationSectionProps> = ({ 
 
       if (totalScrollableHeight <= 0) return;
 
-      // Calculate exact progress between 0.0 and 1.0 while section is pinned
       const scrolled = -rect.top;
       const rawProgress = Math.max(0, Math.min(1, scrolled / totalScrollableHeight));
 
@@ -55,17 +54,13 @@ export const ScrollAnimationSection: React.FC<ScrollAnimationSectionProps> = ({ 
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[320vh] bg-[#070709] bg-mesh-glow bg-grid-pattern"
+      className="relative w-full h-[320vh] bg-transparent"
       id="story-animation"
     >
       <ScrollController scrollProgress={scrollProgress} />
 
-      {/* Sticky Viewport Stage - Pinned in Viewport for 320vh of scrolling */}
+      {/* Sticky Viewport Stage */}
       <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex items-center justify-center p-4 sm:p-10 pointer-events-none">
-        {/* Background Ambient Glow Orbs */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] bg-amber-500/12 rounded-full blur-[170px] pointer-events-none" />
-        <div className="absolute top-1/3 right-1/4 w-[450px] h-[450px] bg-sky-500/10 rounded-full blur-[150px] pointer-events-none" />
-
         {/* Framed Studio Canvas Container */}
         <div className="relative z-10 w-full max-w-4xl h-[62vh] sm:h-[72vh] rounded-3xl glass-studio border border-zinc-800/80 p-2 sm:p-4 overflow-hidden flex items-center justify-center shadow-2xl pointer-events-none">
           {/* Tactical Corner Frame Brackets */}
