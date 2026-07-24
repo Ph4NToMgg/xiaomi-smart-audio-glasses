@@ -6,15 +6,20 @@ interface OverlayContentProps {
 }
 
 export const OverlayContent: React.FC<OverlayContentProps> = ({ progress }) => {
-  // Hero Title Fades out as user scrolls past initial view (0.0 to 0.15)
-  const heroOpacity = Math.max(0, 1 - progress / 0.15);
+  // Hero Title Fades out as user scrolls past initial view (0.0 to 0.12)
+  const heroOpacity = Math.max(0, 1 - progress / 0.12);
 
-  // Side Feature Cards smoothly fade in & slide up after initial scroll (0.08 to 0.22)
-  const cardT = Math.min(1, Math.max(0, (progress - 0.08) / 0.14));
-  const cardEase = 1 - Math.pow(1 - cardT, 3); // Cubic ease-out curve
+  // Side Feature Cards smoothly fade in at start (0.05..0.15) and fade out at end (0.88..0.98)
+  let sideCardOpacity = 0;
+  if (progress < 0.15) {
+    sideCardOpacity = Math.min(1, Math.max(0, (progress - 0.04) / 0.11));
+  } else if (progress > 0.88) {
+    sideCardOpacity = Math.min(1, Math.max(0, (0.98 - progress) / 0.10));
+  } else {
+    sideCardOpacity = 1;
+  }
 
-  const sideCardOpacity = cardEase;
-  const sideCardTranslateY = (1 - cardEase) * 35;
+  const sideCardTranslateY = (1 - sideCardOpacity) * 25;
 
   return (
     <div className="absolute inset-0 z-20 pointer-events-none flex flex-col justify-between p-4 sm:p-8">
@@ -38,7 +43,7 @@ export const OverlayContent: React.FC<OverlayContentProps> = ({ progress }) => {
         </div>
       </div>
 
-      {/* Center Layout: Left & Right Feature Highlight Cards (Fade in on scroll) */}
+      {/* Center Layout: Left & Right Feature Highlight Cards */}
       <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-6 pointer-events-none my-auto">
         {/* Left Feature Card: Acoustic Component Disassembly */}
         <div
@@ -72,7 +77,7 @@ export const OverlayContent: React.FC<OverlayContentProps> = ({ progress }) => {
           </div>
 
           <p className="text-[11px] text-zinc-300 leading-relaxed pt-1 border-t border-zinc-800">
-            Scroll down to view internal dual speakers, micro-wiring, and magnetic hinges disassemble in real-time.
+            Scroll down to view internal dual speakers, micro-wiring, and magnetic hinges disassemble & reassemble in real-time.
           </p>
         </div>
 
