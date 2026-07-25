@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Volume2, ShieldCheck, Waves, Radio, Activity, Sparkles, Lock, Unlock } from 'lucide-react';
+import { ShieldCheck, Waves, Radio, Activity, Lock, Unlock, Zap, Volume2 } from 'lucide-react';
 
 export const AcousticTechDemo: React.FC = () => {
   const [privacyMode, setPrivacyMode] = useState(true);
@@ -28,10 +28,10 @@ export const AcousticTechDemo: React.FC = () => {
           </p>
         </div>
 
-        {/* Interactive Sound Simulation Box */}
+        {/* Interactive Acoustic Showcase Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Left Interactive Control Card */}
-          <div className="lg:col-span-5 glass-studio-gold rounded-3xl p-8 border border-amber-500/30 space-y-6">
+          {/* Left Interactive Telemetry & Control Card */}
+          <div className="lg:col-span-5 glass-studio-gold rounded-3xl p-6 sm:p-8 border border-amber-500/40 space-y-6 shadow-2xl">
             <div className="flex items-center justify-between">
               <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest flex items-center gap-2">
                 <Activity className="w-4 h-4" />
@@ -56,7 +56,7 @@ export const AcousticTechDemo: React.FC = () => {
                   onClick={() => setPrivacyMode(true)}
                   className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
                     privacyMode
-                      ? 'bg-amber-500/20 border-amber-400 text-white gold-border-glow'
+                      ? 'bg-amber-500/20 border-amber-400 text-white gold-border-glow shadow-lg'
                       : 'bg-zinc-950/80 border-zinc-800 text-zinc-400 hover:border-zinc-700'
                   }`}
                 >
@@ -74,7 +74,7 @@ export const AcousticTechDemo: React.FC = () => {
                   onClick={() => setPrivacyMode(false)}
                   className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
                     !privacyMode
-                      ? 'bg-red-500/20 border-red-500 text-white'
+                      ? 'bg-red-500/20 border-red-500 text-white shadow-lg'
                       : 'bg-zinc-950/80 border-zinc-800 text-zinc-400 hover:border-zinc-700'
                   }`}
                 >
@@ -124,57 +124,82 @@ export const AcousticTechDemo: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Equalizer & Beam Wave Visualizer */}
-          <div className="lg:col-span-7 glass-studio rounded-3xl p-8 border border-zinc-800 relative overflow-hidden flex flex-col items-center justify-center min-h-[420px]">
-            {/* Visual Ear Diagram & Beam Lines */}
-            <div className="relative w-full max-w-md h-72 flex items-center justify-center">
-              {/* Central Ear Silhouette Icon */}
-              <div className="relative z-10 w-28 h-28 rounded-full bg-zinc-950/90 border-2 border-amber-500/50 flex flex-col items-center justify-center gold-glow">
-                <Waves className="w-10 h-10 text-amber-400 animate-pulse" />
-                <span className="text-[10px] font-mono text-zinc-400 mt-1 font-bold">EAR CANAL</span>
-              </div>
+          {/* Right Column: Real Macro Product Photo with Dynamic Sound Beam Overlay */}
+          <div className="lg:col-span-7 glass-studio rounded-3xl p-6 sm:p-8 border border-zinc-800/80 relative overflow-hidden flex flex-col justify-between min-h-[460px] shadow-2xl">
+            {/* Top Bar Status */}
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-4 mb-4 relative z-10 font-mono text-xs">
+              <span className="text-amber-400 font-bold uppercase tracking-wider flex items-center gap-2">
+                <Waves className="w-4 h-4" />
+                ACOUSTIC SPEAKER GRILL & EAR CANAL BEAM
+              </span>
+              <span className={`px-3 py-1 rounded-full border text-[11px] font-bold ${
+                privacyMode
+                  ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-400'
+                  : 'bg-red-500/20 border-red-500/40 text-red-400'
+              }`}>
+                {privacyMode ? '✓ Anti-Phase Beam Active' : '⚠ Open Leakage'}
+              </span>
+            </div>
 
-              {/* Sound Rays */}
+            {/* Real Product Photo with Glowing Sound Wave Overlay */}
+            <div className="relative w-full h-72 sm:h-80 rounded-2xl overflow-hidden bg-zinc-950 border border-zinc-800/80 mb-6 group">
+              <img
+                src={privacyMode ? '/images/acoustic-beam.png' : '/images/anti-phase-leak.png'}
+                alt="Acoustic Speaker Directional Sound Beam"
+                className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+              />
+
+              {/* Gradient Shadow Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-black/30" />
+
+              {/* Animated Sound Wave Beam Rays Overlay */}
               {privacyMode ? (
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="w-56 h-56 rounded-full border border-amber-400/40 animate-ping opacity-30" />
-                  <div className="w-72 h-72 rounded-full border border-dashed border-amber-400/20" />
-                  <div className="absolute top-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-400 text-[11px] font-mono font-bold flex items-center gap-1.5 backdrop-blur-md">
-                    <ShieldCheck className="w-3.5 h-3.5" />
-                    <span>✓ Anti-Phase Sound Beam Active</span>
+                  <div className="w-48 h-48 rounded-full border-2 border-amber-400/50 animate-ping opacity-60" />
+                  <div className="w-64 h-64 rounded-full border border-dashed border-amber-400/30 animate-spin-slow" />
+                  <div className="absolute bottom-4 left-4 px-3.5 py-1.5 rounded-xl bg-zinc-950/90 border border-amber-500/40 text-amber-400 font-mono text-[11px] font-bold backdrop-blur-md flex items-center gap-2">
+                    <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                    <span>85% Reverse Anti-Phase Leak Cancelled</span>
                   </div>
                 </div>
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="w-72 h-72 rounded-full border-2 border-red-500/40 animate-pulse opacity-50" />
-                  <div className="absolute top-2 px-3 py-1 rounded-full bg-red-500/20 border border-red-500/40 text-red-400 text-[11px] font-mono font-bold backdrop-blur-md">
-                    ⚠ Ambient Sound Leakage Detected
+                  <div className="w-64 h-64 rounded-full border-2 border-red-500/50 animate-pulse opacity-70" />
+                  <div className="absolute bottom-4 left-4 px-3.5 py-1.5 rounded-xl bg-zinc-950/90 border border-red-500/40 text-red-400 font-mono text-[11px] font-bold backdrop-blur-md">
+                    ⚠ Standard Audio Dispersion (Sound Leaks to Surroundings)
                   </div>
                 </div>
               )}
+            </div>
 
-              {/* Equalizer Frequency Bars */}
-              <div className="absolute bottom-2 flex items-end gap-1.5 h-20">
-                {[45, 70, 35, 90, 100, 60, 80, 50, 95, 65, 85, 40, 75, 55, 92].map((h, i) => (
+            {/* Real-Time Live Frequency Spectrum Bar */}
+            <div className="p-4 rounded-2xl bg-zinc-950/95 border border-amber-500/30 backdrop-blur-2xl shadow-xl space-y-2">
+              <div className="flex items-center justify-between text-xs font-mono">
+                <span className="text-zinc-400 flex items-center gap-2">
+                  <Volume2 className="w-4 h-4 text-amber-400" />
+                  Live Frequency Spectrum Visualization
+                </span>
+                <span className="text-amber-400 font-bold">{activeFrequency} Hz</span>
+              </div>
+
+              {/* Spectrum Bars */}
+              <div className="flex items-end gap-1.5 h-12 pt-2">
+                {[45, 75, 40, 90, 100, 65, 85, 55, 95, 70, 88, 48, 80, 60, 92, 50, 78].map((h, i) => (
                   <div
                     key={i}
-                    className={`w-2 rounded-t transition-all duration-300 ${
-                      privacyMode ? 'bg-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.5)]' : 'bg-red-500'
+                    className={`flex-1 rounded-t transition-all duration-300 ${
+                      privacyMode
+                        ? 'bg-gradient-to-t from-amber-500 to-amber-300 shadow-[0_0_10px_rgba(245,158,11,0.5)]'
+                        : 'bg-gradient-to-t from-red-600 to-red-400'
                     }`}
                     style={{
-                      height: `${privacyMode ? (h * activeFrequency) / 4000 + 20 : h * 0.4}%`,
-                      opacity: 0.5 + (i % 3) * 0.25,
+                      height: `${privacyMode ? Math.min(100, (h * activeFrequency) / 3500 + 15) : h * 0.45}%`,
+                      opacity: 0.6 + (i % 3) * 0.2,
                     }}
                   />
                 ))}
               </div>
             </div>
-
-            <p className="text-xs font-mono text-zinc-300 text-center mt-6 max-w-sm">
-              {privacyMode
-                ? 'Sound energy is tightly focused into ear canal. Ambient sound leak minimized.'
-                : 'Wide sound wave dispersion. People nearby may hear audio output.'}
-            </p>
           </div>
         </div>
       </div>
